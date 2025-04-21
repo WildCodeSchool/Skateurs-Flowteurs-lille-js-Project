@@ -9,7 +9,6 @@ export const Header = () => {
 
     const handleClick = () => {
         setIsVisible(!isVisible)
-        console.log("click");
     };
 
 
