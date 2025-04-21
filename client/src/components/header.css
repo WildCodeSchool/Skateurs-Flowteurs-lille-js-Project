@@ -28,19 +28,9 @@
     display: none;
   }
 
-  .burgerBarOn{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    width: 15rem;
-    color: #d7dad7;
-    font-family: "Permanent Marker";
-    position: fixed;
-    bottom: 50%;
-    z-index: 2;
-  }
+.burgerBarOn{
+    display: none;
+}
 
 
 @media screen and (min-width: 770px) {
@@ -58,5 +48,19 @@
 
   .burgerBarOn img {
     align-self: baseline;
+  }
+
+  .burgerBarOn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 15rem;
+    color: #d7dad7;
+    font-family: "Permanent Marker";
+    position: fixed;
+    bottom: 50%;
+    z-index: 2;
   }
 }
