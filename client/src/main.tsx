@@ -2,6 +2,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import {Header} from "./components/header";
+
 
 /* ************************************************************************* */
 
@@ -37,6 +39,7 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
+    <Header/>
     <RouterProvider router={router} />
   </StrictMode>,
 );

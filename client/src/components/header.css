@@ -1,0 +1,19 @@
+.HeaderNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.HeaderNav img {
+  width: 5rem;
+  height: 5rem;
+  transform: scaleX(-1);
+}
+
+.HeaderNav h1 {
+  font-family: "Permanent Marker";
+  font-weight: 500;
+  color: #d7dad7;
+}
