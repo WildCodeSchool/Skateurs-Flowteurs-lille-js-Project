@@ -15,7 +15,7 @@
 
 .buttonNav{
   border: none;
-  background: none;
+  background: #d7dad7;
 }
 
 @media screen and (min-width: 770px) {

@@ -1,5 +1,6 @@
 import styles from "./header.module.css"
 import { useState } from "react";
+import {Link} from "react-router"
 
 
 
@@ -25,7 +26,7 @@ export const Header = () => {
                 <a>Home</a>
                 <a>SkateMap</a>
                 <a>TricksDex</a>
-                <a>Profil</a>
+                <Link to="/profil" className="links">Profil</Link>
                 <a>Contact</a>
             </div>
         </>
