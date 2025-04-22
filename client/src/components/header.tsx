@@ -1,4 +1,4 @@
-import "./header.css"
+import styles from "./header.module.css"
 import { useState } from "react";
 
 
@@ -15,12 +15,12 @@ export const Header = () => {
 
     return (
         <>
-            <nav className="HeaderNav">
-                <img className="burger" src="./public/BButton.svg" onClick={handleClick}/>
+            <nav className={styles.HeaderNav}>
+                <img className={styles.burger} src="./public/BButton.svg" onClick={handleClick}/>
                 <img src="./public/logo.png" alt="cow on a skateboard" />
                 <h1>InterPark</h1>
             </nav>
-            <div className={isVisible? "burgerBarOn" : "burgerBarOff"}>
+            <div className={isVisible? styles.burgerBarOn : styles.burgerBarOff}>
                 <img src="./public/cross.svg" onClick={handleClick}/>
                 <a>Home</a>
                 <a>SkateMap</a>
