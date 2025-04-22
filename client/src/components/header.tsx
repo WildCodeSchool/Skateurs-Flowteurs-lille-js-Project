@@ -28,6 +28,12 @@ export const Header = () => {
                 <a>Profil</a>
                 <a>Contact</a>
             </div>
+            <div className="tapbar">
+                <img src="./public/mapIcon.png" />
+                <img src="./public/tricksIcon.png" />
+                <img src="./public/profileIcon.png" />
+                <img src="./public/contactIcon.png" />
+            </div>
         </>
     )
 }
