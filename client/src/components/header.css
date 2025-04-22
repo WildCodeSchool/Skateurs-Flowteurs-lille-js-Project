@@ -60,7 +60,7 @@
     color: #d7dad7;
     font-family: "Permanent Marker";
     position: fixed;
-    bottom: 50%;
+    top: 0;
     z-index: 2;
   }
 
