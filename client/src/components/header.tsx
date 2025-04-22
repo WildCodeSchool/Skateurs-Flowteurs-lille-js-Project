@@ -16,12 +16,12 @@ export const Header = () => {
     return (
         <>
             <nav className={styles.HeaderNav}>
-                <img className={styles.burger} src="./public/BButton.svg" onClick={handleClick}/>
+                <button className={styles.burger}><img src="./public/BButton.svg" onClick={handleClick}/></button>
                 <img src="./public/logo.png" alt="cow on a skateboard" />
                 <h1>InterPark</h1>
             </nav>
             <div className={isVisible? styles.burgerBarOn : styles.burgerBarOff}>
-                <img src="./public/cross.svg" onClick={handleClick}/>
+                <button><img src="./public/cross.svg" onClick={handleClick}/></button>
                 <a>Home</a>
                 <a>SkateMap</a>
                 <a>TricksDex</a>
