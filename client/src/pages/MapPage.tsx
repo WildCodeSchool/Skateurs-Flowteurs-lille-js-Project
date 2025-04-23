@@ -5,7 +5,9 @@ const MapPage = () => {
     return (
         <main className={styles.map}>
             <h1 className={styles.title}>SkateMap</h1>
-            <MapContainer />
+            <div className={styles.mapWrapper}>
+                <MapContainer />
+            </div>
         </main>
     );
 };
