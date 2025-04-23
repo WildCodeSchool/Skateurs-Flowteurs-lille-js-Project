@@ -4,7 +4,7 @@ import styles from "./tapbar.module.css";
 export const Tapbar = () => {
   return (
     <nav className={styles.tapbar}>
-      <Link to="/" className={styles.buttonNav}>
+      <Link to="/MapPage" className={styles.buttonNav}>
         <img src="./public/mapIcon.png" />
       </Link>
       <Link to="/tricksdex" className={styles.buttonNav}>

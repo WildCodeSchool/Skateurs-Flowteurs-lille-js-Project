@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import App from "./App";
 import { Profile } from "./pages/profile";
 import { TricksDex } from "./pages/TricksDex";
+import MapPage from "./pages/MapPage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/tricksdex",
         element: <TricksDex />,
+      },
+      {
+        path: "/Mappage",
+        element: <MapPage />,
       },
     ],
   },
