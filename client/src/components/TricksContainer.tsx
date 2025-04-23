@@ -9,14 +9,6 @@ interface Trick {
   xp: number;
 }
 
-interface Trick {
-  id: number;
-  name: string;
-  video: string;
-  level: string;
-  xp: number;
-}
-
 export const TricksContainer = () => {
   return (
     <section className={styles.container}>
