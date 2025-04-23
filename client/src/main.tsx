@@ -7,7 +7,8 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 
 // Import the main app component
 import App from "./App";
-import MapPage from "./pages/MapPage";
+import { Profile } from "./pages/profile";
+import { TricksDex } from "./pages/TricksDex";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -19,16 +20,25 @@ import MapPage from "./pages/MapPage";
 
 // Create router configuration with routes
 // You can add more routes as you build out your app!
+
 const router = createBrowserRouter([
   {
-    path: "/", // The root path
-    element: <App />, // Renders the App component for the home page
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/profil",
+        element: <Profile />,
+      },
+      {
+        path: "/tricksdex",
+        element: <TricksDex />,
+      },
+    ],
   },
-  {
-    path: "/Mappage",
-    element: <MapPage />,
-  },
-
 ]);
 
 /* ************************************************************************* */
@@ -43,7 +53,7 @@ if (rootElement == null) {
 createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </StrictMode>
 );
 
 /**

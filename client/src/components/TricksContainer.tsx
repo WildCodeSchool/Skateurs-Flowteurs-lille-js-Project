@@ -1,0 +1,49 @@
+import { tricksList } from "../data/TricksList";
+import styles from "./TricksContainer.module.css";
+
+interface Trick {
+  id: number;
+  name: string;
+  video: string;
+  level: string;
+  xp: number;
+}
+
+export const TricksContainer = () => {
+  return (
+    <section className={styles.container}>
+      <nav className={styles.tricksNav}>
+        <button className={styles.btn} type="button">
+          Noob
+        </button>
+        <button className={styles.btn} type="button">
+          Mid
+        </button>
+        <button className={styles.btn} type="button">
+          Hard
+        </button>
+      </nav>
+      <ul className={styles.ul}>
+        {tricksList.map(({ name, id, video, xp, level }: Trick) => (
+          <li key={id} className={styles.trickCard}>
+            <iframe
+              width="260"
+              height="150"
+              src={video}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              loading="lazy"
+              allowFullScreen
+            ></iframe>
+            <h2>{name}</h2>
+            <p>Niveau : {level}</p>
+            <p>Gain d'xp : {xp}</p>
+            <button type="button">Valider</button>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};

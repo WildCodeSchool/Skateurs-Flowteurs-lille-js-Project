@@ -1,0 +1,37 @@
+@import "./variables.css";
+
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--mainFont);
+  background-color: var(--darkColor);
+  color: var(--lightColor);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: var(--titleFont);
+  color: var(--orangeColor);
+}
