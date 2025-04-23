@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 /* ************************************************************************* */
 
 // Import the main app component
-//import App from "./App";
+import App from "./App";
 import MapPage from "./pages/MapPage";
 
 // Import additional components for new routes
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <App />, // Renders the App component for the home page
   },
   {
-    path: "/map",
+    path: "/Mappage",
     element: <MapPage />,
   },
 
