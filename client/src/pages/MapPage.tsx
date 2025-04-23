@@ -1,12 +1,13 @@
 import MapContainer from '../components/MapContainer';
+import styles from './Map.module.css';
 
 const MapPage = () => {
     return (
-        <main style={{ width: '100%', height: '100vh' }}>
+        <main className={styles.map}>
+            <h1 className={styles.title}>SkateMap</h1>
             <MapContainer />
         </main>
     );
 };
 
 export default MapPage;
-
