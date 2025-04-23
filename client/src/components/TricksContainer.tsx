@@ -1,5 +1,5 @@
+import { tricksList } from "../data/TricksList";
 import styles from "./TricksContainer.module.css";
-import { tricksList } from "./TricksList";
 
 interface Trick {
   id: number;
