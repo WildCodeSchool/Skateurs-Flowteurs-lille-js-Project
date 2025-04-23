@@ -5,10 +5,10 @@ import { Tapbar } from "../components/tapbar"
 
 export const Profile = () => {
 
-    const [tutoHidden, setTutoHidden] = useState(false);
+    const [isTutoHidden, setIsTutoHidden] = useState(false);
 
-    const handleClick = () =>{
-        setTutoHidden(!tutoHidden)
+    const handleClick = () => {
+        setIsTutoHidden(!isTutoHidden)
 
     }
 
@@ -21,8 +21,8 @@ export const Profile = () => {
                     <h2>Profil</h2>
                     <button onClick={handleClick}>i</button>
                 </div>
-                <p className={tutoHidden? styles.tutoVisible : styles.tutoInvisible}>Crée ton compte pour profiter pleinement de toutes les fonctionnalités de notre site. Rejoins-nous en quelques clics, c'est rapide, simple et sécurisé.
-                                </p>
+                <p className={isTutoHidden ? styles.tutoVisible : styles.tutoInvisible}>Crée ton compte pour profiter pleinement de toutes les fonctionnalités de notre site. Rejoins-nous en quelques clics, c'est rapide, simple et sécurisé.
+                </p>
 
                 <div className={styles.connectionButton}>
                     <h3>Se connecter via Google</h3>
