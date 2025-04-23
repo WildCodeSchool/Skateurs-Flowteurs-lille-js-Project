@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { tricksList } from "../data/TricksList";
 import styles from "./TricksContainer.module.css";
 
@@ -10,21 +11,46 @@ interface Trick {
 }
 
 export const TricksContainer = () => {
+  const [filter, setFilter] = useState<"Noob" | "Mid" | "Hard" | "all">("all");
+  const handleFilter = (newFilter: typeof filter) => setFilter(newFilter);
+  const filteredTricksList =
+    filter === "all"
+      ? tricksList
+      : tricksList.filter((trick) => trick.level === filter);
+
   return (
     <section className={styles.container}>
       <nav className={styles.tricksNav}>
-        <button className={styles.btn} type="button">
+        <button
+          className={filter === "Noob" ? styles.btnActive : styles.btn}
+          type="button"
+          onClick={() => {
+            handleFilter("Noob");
+          }}
+        >
           Noob
         </button>
-        <button className={styles.btn} type="button">
+        <button
+          className={filter === "Mid" ? styles.btnActive : styles.btn}
+          type="button"
+          onClick={() => {
+            handleFilter("Mid");
+          }}
+        >
           Mid
         </button>
-        <button className={styles.btn} type="button">
+        <button
+          className={filter === "Hard" ? styles.btnActive : styles.btn}
+          type="button"
+          onClick={() => {
+            handleFilter("Hard");
+          }}
+        >
           Hard
         </button>
       </nav>
       <ul className={styles.ul}>
-        {tricksList.map(({ name, id, video, xp, level }: Trick) => (
+        {filteredTricksList.map(({ name, id, video, xp, level }: Trick) => (
           <li key={id} className={styles.trickCard}>
             <iframe
               width="260"
