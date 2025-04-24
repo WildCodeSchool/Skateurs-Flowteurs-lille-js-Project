@@ -8,7 +8,7 @@ const MapContainer = () => {
         <APIProvider apiKey={apiKey}>
             <div className={styles.mapcontainer}>
                 <Map
-                    style={{ width: '100vw', height: '100vh' }}
+                    className={styles.map}
                     defaultCenter={{ lat: 50.62925, lng: 3.057256 }} // Lille
                     defaultZoom={10}
                     gestureHandling={'greedy'}
@@ -20,4 +20,3 @@ const MapContainer = () => {
 };
 
 export default MapContainer;
-
