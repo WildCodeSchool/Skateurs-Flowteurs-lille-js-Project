@@ -31,6 +31,16 @@
   }
 }
 
+.btnActive {
+  background-color: var(--lightColor);
+  color: var(--blueColor);
+  border: none;
+  font-family: var(--titleFont);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
 .ul {
   max-height: 400px;
   overflow-x: scroll;
