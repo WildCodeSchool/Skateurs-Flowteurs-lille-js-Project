@@ -6,6 +6,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/JNmUK9fvrAs",
     level: "Noob",
     xp: 100,
+    isValidated: false,
   },
   {
     id: 2,
@@ -13,6 +14,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/Oq9Y3i7HD40",
     level: "Noob",
     xp: 150,
+    isValidated: false,
   },
   {
     id: 3,
@@ -20,6 +22,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/1BTeDCziNdc",
     level: "Noob",
     xp: 120,
+    isValidated: false,
   },
   {
     id: 4,
@@ -27,6 +30,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/4c2oql5epAo",
     level: "Noob",
     xp: 130,
+    isValidated: false,
   },
   {
     id: 5,
@@ -34,6 +38,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/cRV7_i6sfNA",
     level: "Noob",
     xp: 110,
+    isValidated: false,
   },
   {
     id: 6,
@@ -41,6 +46,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/xS6elK6Khs4",
     level: "Noob",
     xp: 140,
+    isValidated: false,
   },
   {
     id: 7,
@@ -48,6 +54,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/LtF_gdpw5hU",
     level: "Noob",
     xp: 125,
+    isValidated: false,
   },
   {
     id: 8,
@@ -55,6 +62,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/c3lEnPpjMSQ",
     level: "Noob",
     xp: 160,
+    isValidated: false,
   },
   {
     id: 9,
@@ -62,6 +70,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/uLK--35erFw",
     level: "Noob",
     xp: 90,
+    isValidated: false,
   },
   {
     id: 10,
@@ -69,6 +78,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/d3QVC1llwGM",
     level: "Noob",
     xp: 80,
+    isValidated: false,
   },
 
   // Mid
@@ -78,6 +88,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/jxTGfQT6-lU",
     level: "Mid",
     xp: 250,
+    isValidated: false,
   },
   {
     id: 12,
@@ -85,6 +96,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/UvjNBSlmjLg",
     level: "Mid",
     xp: 260,
+    isValidated: false,
   },
   {
     id: 13,
@@ -92,6 +104,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/ff2m--lXE-g",
     level: "Mid",
     xp: 280,
+    isValidated: false,
   },
   {
     id: 14,
@@ -99,6 +112,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/bRmL15mNBcA",
     level: "Mid",
     xp: 220,
+    isValidated: false,
   },
   {
     id: 15,
@@ -106,6 +120,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/MDY5CfIbcFk",
     level: "Mid",
     xp: 230,
+    isValidated: false,
   },
   {
     id: 16,
@@ -113,6 +128,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/SJX6jgKFxlY",
     level: "Mid",
     xp: 240,
+    isValidated: false,
   },
   {
     id: 17,
@@ -120,6 +136,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/8dmIMiWCEKA",
     level: "Mid",
     xp: 270,
+    isValidated: false,
   },
   {
     id: 18,
@@ -127,6 +144,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/dfomBfvBpfs",
     level: "Mid",
     xp: 260,
+    isValidated: false,
   },
   {
     id: 19,
@@ -134,6 +152,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/K4_ZEYzacLo",
     level: "Mid",
     xp: 250,
+    isValidated: false,
   },
   {
     id: 20,
@@ -141,6 +160,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/WAAzl5gU7pg",
     level: "Mid",
     xp: 240,
+    isValidated: false,
   },
 
   // Hard
@@ -150,6 +170,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/HJLMWOciMVk",
     level: "Hard",
     xp: 400,
+    isValidated: false,
   },
   {
     id: 22,
@@ -157,6 +178,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/XGw3YkQmNig",
     level: "Hard",
     xp: 450,
+    isValidated: false,
   },
   {
     id: 23,
@@ -164,6 +186,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/0U4OmfatAgo",
     level: "Hard",
     xp: 480,
+    isValidated: false,
   },
   {
     id: 24,
@@ -171,6 +194,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/Fi7gPPN9zC8",
     level: "Hard",
     xp: 470,
+    isValidated: false,
   },
   {
     id: 25,
@@ -178,6 +202,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/NfGF5lTDnYA",
     level: "Hard",
     xp: 420,
+    isValidated: false,
   },
   {
     id: 26,
@@ -185,6 +210,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/FgDRqHGhPiQ",
     level: "Hard",
     xp: 430,
+    isValidated: false,
   },
   {
     id: 27,
@@ -192,6 +218,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/EOUxQCN1v_I",
     level: "Hard",
     xp: 410,
+    isValidated: false,
   },
   {
     id: 28,
@@ -199,6 +226,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/CEIJdkCVfCg",
     level: "Hard",
     xp: 460,
+    isValidated: false,
   },
   {
     id: 29,
@@ -206,6 +234,7 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/cdK8ZBzZ9z0",
     level: "Hard",
     xp: 440,
+    isValidated: false,
   },
   {
     id: 30,
@@ -213,5 +242,6 @@ export const tricksList = [
     video: "https://www.youtube.com/embed/YwVNxoxlov8",
     level: "Hard",
     xp: 500,
+    isValidated: false,
   },
 ];

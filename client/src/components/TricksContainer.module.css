@@ -83,10 +83,17 @@
     background-color: var(--lightColor);
     cursor: pointer;
     transition: 0.3s ease;
+    border: 2px solid var(--lightColor);
 
     &:hover {
       color: var(--lightColor);
       background-color: var(--darkColor);
     }
+  }
+
+  .validated {
+    background-color: var(--blueColor);
+    border: 2px solid var(--blueColor);
+    color: var(--lightColor);
   }
 }
