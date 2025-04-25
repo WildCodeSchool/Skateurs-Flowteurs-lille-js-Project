@@ -2,6 +2,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { UserProvider } from './context/UserInfoContext';
 
 /* ************************************************************************* */
 
@@ -52,8 +54,12 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </GoogleOAuthProvider>
+  </StrictMode>,
 );
 
 /**
