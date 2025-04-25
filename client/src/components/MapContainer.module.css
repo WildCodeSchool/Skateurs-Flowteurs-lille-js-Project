@@ -17,3 +17,10 @@
   height: 100%;
   border-radius: 5px;
 }
+
+@media (max-width: 770px) {
+  .mapcontainer {
+    width: 90%;
+    margin: auto;
+  }
+}
