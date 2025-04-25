@@ -9,6 +9,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  background-color: var(--darkColor);
 }
 
 .HeaderNav img {
@@ -34,6 +35,10 @@ a {
 
 .burgerBarOn {
   display: none;
+  background-color: var(--darkColor);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 2px solid var(--orangeColor);
 }
 
 @media screen and (min-width: 770px) {
@@ -44,6 +49,13 @@ a {
     position: fixed;
     right: 95%;
     border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .cross {
+    background-color: transparent;
+    cursor: pointer;
   }
 
   .HeaderNav .burger img {

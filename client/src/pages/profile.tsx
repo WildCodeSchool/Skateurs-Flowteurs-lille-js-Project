@@ -1,22 +1,17 @@
 import styles from "./profile.module.css"
 import { useState } from "react"
-import { Header } from "../components/header"
-import { Tapbar } from "../components/tapbar"
 import Login from "../components/Login"
 
 export const Profile = () => {
+  const [isTutoHidden, setIsTutoHidden] = useState(false);
 
-    const [isTutoHidden, setIsTutoHidden] = useState(false);
+  const handleClick = () => {
+    setIsTutoHidden(!isTutoHidden);
+  };
 
-    const handleClick = () => {
-        setIsTutoHidden(!isTutoHidden)
-
-    }
 
     return (
         <>
-            <Header />
-            <Tapbar />
             <div className={styles.mainProfilePageContainer}>
                 <div className={styles.pageTitle}>
                     <h2>Profil</h2>

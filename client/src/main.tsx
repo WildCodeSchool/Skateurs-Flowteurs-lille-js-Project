@@ -5,12 +5,12 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserProvider } from './context/UserInfoContext';
 
-
 /* ************************************************************************* */
 
 // Import the main app component
 import App from "./App";
 import { Profile } from "./pages/profile";
+import { TricksDex } from "./pages/TricksDex";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -22,16 +22,25 @@ import { Profile } from "./pages/profile";
 
 // Create router configuration with routes
 // You can add more routes as you build out your app!
+
 const router = createBrowserRouter([
   {
-    path: "/", // The root path
-    element: <App />, // Renders the App component for the home page
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/profil",
+        element: <Profile />,
+      },
+      {
+        path: "/tricksdex",
+        element: <TricksDex />,
+      },
+    ],
   },
-  {
-    path: "/profil",
-    element: <Profile />
-  },
-  // Try adding a new route! For example, "/about" with an About component
 ]);
 
 /* ************************************************************************* */
