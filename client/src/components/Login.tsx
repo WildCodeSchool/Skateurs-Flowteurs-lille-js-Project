@@ -13,7 +13,6 @@ function Login() {
                     { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
                 );
                 const userInfo = await response.json();
-                console.log(userInfo);
                 setUser({
                     name: userInfo.name,
                     email: userInfo.email,
