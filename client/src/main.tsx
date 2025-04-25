@@ -8,6 +8,7 @@ import App from "./App";
 import { Profile } from "./pages/profile";
 import { TricksDex } from "./pages/TricksDex";
 import MapPage from "./pages/MapPage";
+import { HomePage } from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <HomePage />,
       },
       {
         path: "/profil",

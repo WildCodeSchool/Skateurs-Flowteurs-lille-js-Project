@@ -7,7 +7,7 @@ section {
   height: 22rem;
   width: 100%;
   overflow: hidden;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
   padding: 0 2rem;
 }
