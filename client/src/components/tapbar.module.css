@@ -1,0 +1,25 @@
+.tapbar {
+  display: flex;
+  background-color: #d7dad7;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.tapbar img {
+  background-color: #d7dad7;  
+}
+
+.buttonNav{
+  border: none;
+  background: #d7dad7;
+}
+
+@media screen and (min-width: 770px) {
+    .tapbar{
+        display: none;
+    }
+}

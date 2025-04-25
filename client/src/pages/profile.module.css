@@ -1,0 +1,42 @@
+.mainProfilePageContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: "Permanent Marker";
+  padding: 0.7rem;
+  color: #d7dad7;
+  gap: 4rem;
+}
+
+.pageTitle {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.tutoInvisible {
+  display: none;
+}
+
+.tutoVisible {
+  display: block;
+  text-align: center;
+}
+
+.pageTitle button {
+  text-decoration: none;
+  background-color: #d7dad7;
+  border: none;
+  border-radius: 2rem;
+  width: 1rem;
+  box-shadow: 2px 2px 2px black;
+}
+
+.connectionButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
