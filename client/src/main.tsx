@@ -1,9 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { UserProvider } from './context/UserInfoContext';
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UserProvider } from "./context/UserInfoContext";
 
 import App from "./App";
 import { Profile } from "./pages/profile";
@@ -46,5 +45,5 @@ createRoot(rootElement).render(
         <RouterProvider router={router} />
       </UserProvider>
     </GoogleOAuthProvider>
-  </StrictMode>,
+  </StrictMode>
 );
