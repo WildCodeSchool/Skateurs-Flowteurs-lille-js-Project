@@ -25,7 +25,7 @@ export const Header = () => {
         <Link to="/" className="links">
           Home
         </Link>
-        <Link to="/Carte" className="links">
+        <Link to="/carte" className="links">
           SkateMap
         </Link>
         <Link to="/tricksdex" className="links">
