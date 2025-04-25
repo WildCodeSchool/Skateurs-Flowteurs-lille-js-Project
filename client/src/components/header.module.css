@@ -1,9 +1,15 @@
+a {
+  text-decoration: none;
+  color: #d7dad7;
+}
+
 .HeaderNav {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  background-color: var(--darkColor);
 }
 
 .HeaderNav img {
@@ -29,9 +35,11 @@
 
 .burgerBarOn {
   display: none;
+  background-color: var(--darkColor);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 2px solid var(--orangeColor);
 }
-
-
 
 @media screen and (min-width: 770px) {
   .HeaderNav .burger {
@@ -40,14 +48,33 @@
     width: 2rem;
     position: fixed;
     right: 95%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .cross {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .HeaderNav .burger img {
+    height: 2rem;
+    width: 2rem;
   }
 
   .burgerBarOff img {
     align-self: baseline;
   }
 
+  .burgerBarOn button {
+    border: none;
+  }
+
   .burgerBarOn img {
     align-self: baseline;
+    height: 3rem;
+    width: 3rem;
   }
 
   .burgerBarOn {

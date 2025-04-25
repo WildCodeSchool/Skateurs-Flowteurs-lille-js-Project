@@ -14,6 +14,11 @@
   background-color: #d7dad7;
 }
 
+.buttonNav {
+  border: none;
+  background: #d7dad7;
+}
+
 @media screen and (min-width: 770px) {
   .tapbar {
     display: none;

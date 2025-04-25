@@ -1,0 +1,11 @@
+.googleButton{
+    height: 4rem;
+    width: 4rem;
+    border: none;
+    background: none;
+}
+
+.googleButton img{
+    height: 4rem;
+    width: 4rem;
+}

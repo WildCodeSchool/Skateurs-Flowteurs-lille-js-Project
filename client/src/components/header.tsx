@@ -1,33 +1,41 @@
-import "./header.css"
 import { useState } from "react";
-
-
-
+import { Link } from "react-router";
+import styles from "./header.module.css";
 
 export const Header = () => {
-    const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-    const handleClick = () => {
-        setIsVisible(!isVisible)
-    };
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
 
-
-
-    return (
-        <>
-            <nav className="HeaderNav">
-                <img className="burger" src="./public/BButton.svg" onClick={handleClick}/>
-                <img src="./public/logo.png" alt="cow on a skateboard" />
-                <h1>InterPark</h1>
-            </nav>
-            <div className={isVisible? "burgerBarOn" : "burgerBarOff"}>
-                <img src="./public/cross.svg" onClick={handleClick}/>
-                <a>Home</a>
-                <a>SkateMap</a>
-                <a>TricksDex</a>
-                <a>Profil</a>
-                <a>Contact</a>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <nav className={styles.HeaderNav}>
+        <button className={styles.burger}>
+          <img src="./public/BButton.svg" onClick={handleClick} />
+        </button>
+        <img src="./public/logo.png" alt="cow on a skateboard" />
+        <h1>InterPark</h1>
+      </nav>
+      <div className={isVisible ? styles.burgerBarOn : styles.burgerBarOff}>
+        <button className={styles.cross}>
+          <img src="./public/cross.svg" onClick={handleClick} />
+        </button>
+        <Link to="/" className="links">
+          Home
+        </Link>
+        <Link to="/carte" className="links">
+          SkateMap
+        </Link>
+        <Link to="/tricksdex" className="links">
+          TricksDex
+        </Link>
+        <Link to="/profil" className="links">
+          Profil
+        </Link>
+        <a>Contact</a>
+      </div>
+    </>
+  );
+};
