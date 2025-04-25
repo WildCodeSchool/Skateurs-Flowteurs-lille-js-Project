@@ -9,7 +9,7 @@ const MapContainer = () => {
       <div className={styles.mapcontainer}>
         <Map
           className={styles.map}
-          defaultCenter={{ lat: 50.62925, lng: 3.057256 }} // Lille
+          defaultCenter={{ lat: 50.62925, lng: 3.057256 }}
           defaultZoom={10}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
