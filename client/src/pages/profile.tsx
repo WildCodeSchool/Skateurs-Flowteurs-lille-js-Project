@@ -2,6 +2,7 @@ import styles from "./profile.module.css"
 import { useState } from "react"
 import { Header } from "../components/header"
 import { Tapbar } from "../components/tapbar"
+import Login from "../components/Login"
 
 export const Profile = () => {
 
@@ -26,7 +27,7 @@ export const Profile = () => {
 
                 <div className={styles.connectionButton}>
                     <h3>Se connecter via Google</h3>
-                    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google logo" />
+                    <Login/>
                 </div>
             </div>
         </>
