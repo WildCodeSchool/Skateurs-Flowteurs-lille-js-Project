@@ -1,0 +1,70 @@
+.HeaderNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.HeaderNav img {
+  width: 6.5rem;
+  height: 6.5rem;
+  transform: scaleX(-1);
+  -webkit-user-drag: none;
+}
+
+.HeaderNav h1 {
+  font-family: "Permanent Marker";
+  font-weight: 500;
+  color: #d7dad7;
+}
+
+.HeaderNav .burger {
+  display: none;
+}
+
+.burgerBarOff {
+  display: none;
+}
+
+.burgerBarOn {
+  display: none;
+}
+
+
+
+@media screen and (min-width: 770px) {
+  .HeaderNav .burger {
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    right: 95%;
+  }
+
+  .burgerBarOff img {
+    align-self: baseline;
+  }
+
+  .burgerBarOn img {
+    align-self: baseline;
+  }
+
+  .burgerBarOn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 15rem;
+    color: #d7dad7;
+    font-family: "Permanent Marker";
+    position: fixed;
+    top: 0;
+    z-index: 2;
+  }
+
+  .tapbar {
+    display: none;
+  }
+}
