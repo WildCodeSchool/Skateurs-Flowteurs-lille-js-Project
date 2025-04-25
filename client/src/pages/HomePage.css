@@ -1,17 +1,9 @@
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-}
-
 .HomePage {
   margin: 0 auto 4rem;
 }
 
 section {
   display: flex;
-  /* flex-wrap: wrap; */
   height: 22rem;
   width: 100%;
   overflow: hidden;
@@ -37,38 +29,13 @@ section {
   max-width: 14rem;
   max-height: 14rem;
   transform: scaleX(-1);
-  /* position: absolute; */
   background: none;
 }
 .logoAntoineLeft {
   max-width: 14rem;
   max-height: 14rem;
-  /* position: absolute; */
   background: none;
 }
-
-/* .BubbleLeft:after {
-  content: "";
-  position: absolute;
-  bottom: -60;
-  margin-left: 2px;
-  border-width: 25px;
-  border-style: solid;
-  border-color: transparent transparent #ffffff transparent;
-  transform: rotate(-100deg);
-  right: 10%; 
-} */
-
-/* .BubbleRight:after {
-  content: "";
-  position: absolute;
-  margin-left: 2px;
-  border-width: 25px;
-  border-style: solid;
-  border-color: transparent transparent #ffffff transparent;
-  transform: rotate(100deg);
-  left: 10%;
-} */
 .skate-buttonRight {
   background-color: #ffffff;
   border: none;

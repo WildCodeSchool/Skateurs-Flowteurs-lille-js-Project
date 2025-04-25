@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import "./HomePage.css";
 
 export const HomePage = () => {
@@ -16,9 +17,9 @@ export const HomePage = () => {
       </section>
 
       <section id="blue">
-        <button type="button" className="skate-buttonRight">
+        <Link to="/carte" className="skate-buttonRight">
           skateMap
-        </button>
+        </Link>
         <p className="BubbleLeft">
           Besoin d'un spot pour skater ? Check la carte ! Je te montre tous les
           skateparks autour de toi, la météo et même l'itinéraire pour t'y
@@ -44,15 +45,15 @@ export const HomePage = () => {
           trick pour gagner de l'XP. Let's go progresser !
         </p>
 
-        <button type="button" className="skate-buttonRight">
+        <Link to="/tricksdex" className="skate-buttonRight">
           TricksDex
-        </button>
+        </Link>
       </section>
 
       <section id="blue">
-        <button type="button" className="skate-buttonRight">
+        <Link to="/profil" className="skate-buttonRight">
           Profil
-        </button>
+        </Link>
         <p className="BubbleLeft">
           Ici, c'est ton coin perso. Choisis ton avatar, change de skin,
           connecte-toi avec Google et surveille ton niveau. C'est toi le boss de
@@ -76,9 +77,9 @@ export const HomePage = () => {
           Si vous souhaitez nous contacter ou aller voir nos autres projets, je
           vous invite à vous rendre sur notre page contact.
         </p>
-        <button type="button" className="skate-buttonLeft">
+        <Link to="/contact" className="skate-buttonLeft">
           Contact
-        </button>
+        </Link>
       </section>
     </div>
   );
