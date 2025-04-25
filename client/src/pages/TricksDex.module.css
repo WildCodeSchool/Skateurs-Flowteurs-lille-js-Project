@@ -27,3 +27,21 @@
     border-radius: 10px 0 0 10px;
   }
 }
+
+@media screen and (min-width: 880px) {
+  .topSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10rem;
+  }
+
+  .xpSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tricksAndXp {
+    margin-top: 0;
+  }
+}

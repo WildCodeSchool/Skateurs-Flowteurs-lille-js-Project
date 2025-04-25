@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { UserProvider } from './context/UserInfoContext';
+
+
 import App from "./App";
 import { Profile } from "./pages/profile";
 import { TricksDex } from "./pages/TricksDex";
@@ -37,6 +41,10 @@ if (rootElement == null) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </GoogleOAuthProvider>
+  </StrictMode>,
 );
