@@ -3,10 +3,10 @@ import styles from "./Map.module.css";
 
 const MapPage = () => {
   return (
-    <main className={styles.map}>
+    <div className={styles.map}>
       <h1 className={styles.title}>SkateMap</h1>
       <MapContainer />
-    </main>
+    </div>
   );
 };
 
