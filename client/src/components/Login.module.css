@@ -9,3 +9,38 @@
     height: 4rem;
     width: 4rem;
 }
+
+
+.connectedContainer{
+    display: none;
+}
+
+.notConnectedContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.connectedProfileContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileContainer img{
+    height: 5rem;
+    width: 5rem;
+    background-color: #d7dad7;
+    border-radius: 2.5rem;
+}

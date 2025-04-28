@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
+
+
 type User = {
     name: string;
     email: string;
@@ -27,3 +29,4 @@ export const useUser = (): UserContextType => {
     const context = useContext(UserContext);
     return context;
 };
+

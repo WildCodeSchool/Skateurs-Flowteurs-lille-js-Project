@@ -1,10 +1,17 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { useUser } from '../context/UserInfoContext';
+import { useUser} from '../context/UserInfoContext';
 import styles from "./Login.module.css"
+import { Link } from "react-router"
+import { useState } from 'react';
+
 
 function Login() {
     const { setUser } = useUser();
+    const [isConnected, setIsConnected] = useState(false)
+    const [isEmailVerified, setIsEmailVerified] = useState(false)
 
+    const [profilePicture, setProfilePicture] = useState("https://static.vecteezy.com/system/resources/previews/020/911/740/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png");
+    // const [isEmailVerified, setIsEmailVerified] = useState(false)
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
             try {
@@ -16,8 +23,12 @@ function Login() {
                 setUser({
                     name: userInfo.name,
                     email: userInfo.email,
-                    picture: userInfo.picture
+                    picture: userInfo.picture,
                 });
+                setIsEmailVerified(true)
+                setIsConnected(true)
+                setProfilePicture(userInfo.picture)
+                console.log(userInfo)
             } catch (error) {
                 console.error("Error fetching user info:", error);
             }
@@ -25,11 +36,28 @@ function Login() {
         onError: error => console.log('Login Failed:', error),
     });
 
-    return (
-        <button onClick={() => login()} className={styles.googleButton}>
-            <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google logo" />
-        </button>
-    );
+    if (!isEmailVerified) {
+        return (
+            <div className={isConnected ? styles.connectedContainer : styles.notConnectedContainer} >
+                <h3>Se connecter via Google</h3>
+                <button onClick={() => login()} className={styles.googleButton}>
+                    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google logo" />
+                </button>
+            </div>
+        );
+    }
+    if (isEmailVerified) {
+
+        return (
+            <div className={styles.connectedProfileContainer}>
+                <h2>Mon Profil</h2>
+                <div className={styles.profileContainer}>
+                    <img src={profilePicture} alt="default profile picture silhouette" />
+                    <Link to="/">Crée ton avatar</Link>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default Login;

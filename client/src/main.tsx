@@ -1,5 +1,5 @@
 // Import necessary modules from React and React Router
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -9,8 +9,10 @@ import { UserProvider } from './context/UserInfoContext';
 
 // Import the main app component
 import App from "./App";
-import { Profile } from "./pages/profile";
+import { Profile } from "./pages/Profile";
 import { TricksDex } from "./pages/TricksDex";
+
+
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
