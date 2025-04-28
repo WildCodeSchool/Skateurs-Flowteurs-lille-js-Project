@@ -34,7 +34,9 @@ export const Header = () => {
         <Link to="/profil" className="links">
           Profil
         </Link>
-        <a>Contact</a>
+        <Link to="/Contact" className="links">
+          Contact
+        </Link>
       </div>
     </>
   );

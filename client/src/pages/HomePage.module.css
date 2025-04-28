@@ -24,24 +24,23 @@ section {
   width: 300px;
   top: -150px;
 }
-
+.logoAntoineRight,
+.logoAntoineLeft {
+  width: 300px;
+  max-width: initial;
+}
 .logoAntoineRight {
-  max-width: 14rem;
-  max-height: 14rem;
   transform: scaleX(-1);
   background: none;
 }
 .logoAntoineLeft {
-  max-width: 14rem;
-  max-height: 14rem;
   background: none;
 }
-.skate-buttonRight {
-  background-color: #ffffff;
+.skateButtonRight {
+  background-color: #eef0ed;
   border: none;
   color: #131212;
   padding: 15px 25px;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 50px;
@@ -52,11 +51,11 @@ section {
   top: -50px;
   width: max-content;
 }
-.skate-buttonRight:hover {
+.skateButtonRight:hover {
   transform: scale(1.05);
   background-color: #f0f0f0;
 }
-.skate-buttonLeft {
+.skateButtonLeft {
   background-color: #ffffff;
   border: none;
   color: #131212;
@@ -69,12 +68,12 @@ section {
   transition: transform 0.3s ease;
   height: 50px;
 }
-.skate-buttonLeft:hover {
+.skateButtonLeft:hover {
   transform: scale(1.05);
   background-color: #f0f0f0;
 }
 
-#blue {
+.blue {
   background-color: #6662ff;
 }
 
@@ -88,17 +87,17 @@ section {
     width: 200px;
     border-radius: 15px;
   }
-}
 
-.logoAntoineLeft,
-.logoAntoineRight {
-  max-width: 7rem;
-  max-height: 10rem;
-}
+  .logoAntoineLeft,
+  .logoAntoineRight {
+    max-width: 7rem;
+    max-height: 10rem;
+  }
 
-.skate-buttonLeft,
-.skate-buttonRight {
-  font-size: 10px;
-  padding: 10px 15px;
-  height: 30px;
+  .skateButtonLeft,
+  .skateButtonRight {
+    font-size: 10px;
+    padding: 10px 15px;
+    height: 30px;
+  }
 }

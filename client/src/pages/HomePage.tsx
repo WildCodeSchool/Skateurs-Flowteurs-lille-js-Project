@@ -1,26 +1,26 @@
 import { Link } from "react-router";
-import "./HomePage.css";
+import styles from "./HomePage.module.css";
 
 export const HomePage = () => {
   return (
-    <div className="HomePage">
+    <div className={styles.HomePage}>
       <section>
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
-          className="logoAntoineRight"
+          className={styles.logoAntoineRight}
         />
-        <p className="BubbleRight">
+        <p className={styles.BubbleRight}>
           Salut, c'est Antoine Faucon. Je suis la pour te guider étape par étape
           à travers INTERPARCK
         </p>
       </section>
 
-      <section id="blue">
-        <Link to="/carte" className="skate-buttonRight">
+      <section className={styles.blue}>
+        <Link to="/carte" className={styles.skateButtonRight}>
           skateMap
         </Link>
-        <p className="BubbleLeft">
+        <p className={styles.BubbleLeft}>
           Besoin d'un spot pour skater ? Check la carte ! Je te montre tous les
           skateparks autour de toi, la météo et même l'itinéraire pour t'y
           rendre. Facile, rapide, efficace.
@@ -29,7 +29,7 @@ export const HomePage = () => {
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
-          className="logoAntoineLeft"
+          className={styles.logoAntoineLeft}
         />
       </section>
 
@@ -37,24 +37,24 @@ export const HomePage = () => {
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
-          className="logoAntoineRight"
+          className={styles.logoAntoineRight}
         />
-        <p className="BubbleRight">
+        <p className={styles.BubbleRight}>
           Envie d'apprendre des tricks ? Cette page est ton carnet
           d'entraînement. Commence facile, monte en level, et valide chaque
           trick pour gagner de l'XP. Let's go progresser !
         </p>
 
-        <Link to="/tricksdex" className="skate-buttonRight">
+        <Link to="/tricksdex" className={styles.skateButtonRight}>
           TricksDex
         </Link>
       </section>
 
-      <section id="blue">
-        <Link to="/profil" className="skate-buttonRight">
+      <section className={styles.blue}>
+        <Link to="/profil" className={styles.skateButtonRight}>
           Profil
         </Link>
-        <p className="BubbleLeft">
+        <p className={styles.BubbleLeft}>
           Ici, c'est ton coin perso. Choisis ton avatar, change de skin,
           connecte-toi avec Google et surveille ton niveau. C'est toi le boss de
           ton évolution.
@@ -63,7 +63,7 @@ export const HomePage = () => {
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
-          className="logoAntoineLeft"
+          className={styles.logoAntoineLeft}
         />
       </section>
 
@@ -71,13 +71,13 @@ export const HomePage = () => {
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
-          className="logoAntoineRight"
+          className={styles.logoAntoineRight}
         />
-        <p className="BubbleRight">
+        <p className={styles.BubbleRight}>
           Si vous souhaitez nous contacter ou aller voir nos autres projets, je
           vous invite à vous rendre sur notre page contact.
         </p>
-        <Link to="/contact" className="skate-buttonLeft">
+        <Link to="/contact" className={styles.skateButtonLeft}>
           Contact
         </Link>
       </section>
