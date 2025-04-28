@@ -2,7 +2,7 @@
   margin: 0 auto 4rem;
 }
 
-section {
+.section {
   display: flex;
   height: 22rem;
   width: 100%;
@@ -36,7 +36,7 @@ section {
   max-height: 14rem;
   background: none;
 }
-.skate-buttonRight {
+.skateButtonRight {
   background-color: #ffffff;
   border: none;
   color: #131212;
@@ -52,11 +52,11 @@ section {
   top: -50px;
   width: max-content;
 }
-.skate-buttonRight:hover {
+.skateButtonRight:hover {
   transform: scale(1.05);
   background-color: #f0f0f0;
 }
-.skate-buttonLeft {
+.skateButtonLeft {
   background-color: #ffffff;
   border: none;
   color: #131212;
@@ -69,12 +69,12 @@ section {
   transition: transform 0.3s ease;
   height: 50px;
 }
-.skate-buttonLeft:hover {
+.skateButtonLeft:hover {
   transform: scale(1.05);
   background-color: #f0f0f0;
 }
 
-#blue {
+.blue {
   background-color: #6662ff;
 }
 

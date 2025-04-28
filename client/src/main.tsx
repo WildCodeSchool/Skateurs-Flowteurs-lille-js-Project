@@ -1,13 +1,14 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import { UserProvider } from "./context/UserInfoContext";
 
 import App from "./App";
+import { HomePage } from "./pages/HomePage";
+import MapPage from "./pages/MapPage";
 import { Profile } from "./pages/profile";
 import { TricksDex } from "./pages/TricksDex";
-import MapPage from "./pages/MapPage";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <HomePage />,
       },
       {
         path: "/profil",

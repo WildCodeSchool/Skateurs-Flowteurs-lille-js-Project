@@ -7,11 +7,29 @@
   margin-bottom: 0.5rem;
 }
 
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
 .tricksAndXp {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-family: var(--titleFont);
-  margin-top: 1rem;
+}
+
+.xpSection {
+  display: flex;
+  flex-direction: column;
 }
 
 .xpBar {
@@ -32,13 +50,20 @@
   .topSection {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10rem;
+    gap: 4rem;
+    height: fit-content;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
   }
 
   .xpSection {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   .tricksAndXp {
