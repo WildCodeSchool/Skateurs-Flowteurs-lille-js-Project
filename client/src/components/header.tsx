@@ -25,7 +25,7 @@ export const Header = () => {
         <Link to="/" className="links" onClick={handleClick}>
           Home
         </Link>
-        <Link to="/mappage" className="links" onClick={handleClick}>
+        <Link to="/carte" className="links">
           SkateMap
         </Link>
         <Link to="/tricksdex" className="links" onClick={handleClick}>

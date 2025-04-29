@@ -7,19 +7,20 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 5;
 }
 
 .tapbar img {
-  background-color: #d7dad7;  
+  background-color: #d7dad7;
 }
 
-.buttonNav{
+.buttonNav {
   border: none;
   background: #d7dad7;
 }
 
 @media screen and (min-width: 770px) {
-    .tapbar{
-        display: none;
-    }
+  .tapbar {
+    display: none;
+  }
 }
