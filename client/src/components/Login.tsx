@@ -1,17 +1,18 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { useUser} from '../context/UserInfoContext';
+import { useUser } from '../context/UserInfoContext';
 import styles from "./Login.module.css"
 import { Link } from "react-router"
 import { useState } from 'react';
 
 
 function Login() {
-    const { setUser } = useUser();
+
+    const { setUser, user } = useUser();
     const [isConnected, setIsConnected] = useState(false)
     const [isEmailVerified, setIsEmailVerified] = useState(false)
-
     const [profilePicture, setProfilePicture] = useState("https://static.vecteezy.com/system/resources/previews/020/911/740/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png");
-    // const [isEmailVerified, setIsEmailVerified] = useState(false)
+
+
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
             try {
@@ -36,7 +37,7 @@ function Login() {
         onError: error => console.log('Login Failed:', error),
     });
 
-    if (!isEmailVerified) {
+    if (!user) {
         return (
             <div className={isConnected ? styles.connectedContainer : styles.notConnectedContainer} >
                 <h3>Se connecter via Google</h3>
@@ -46,14 +47,14 @@ function Login() {
             </div>
         );
     }
-    if (isEmailVerified) {
+    else {
 
         return (
             <div className={styles.connectedProfileContainer}>
                 <h2>Mon Profil</h2>
                 <div className={styles.profileContainer}>
-                    <img src={profilePicture} alt="default profile picture silhouette" />
-                    <Link to="/">Crée ton avatar</Link>
+                    <img src={user?.picture ? user.picture : profilePicture} alt="default profile picture silhouette" />
+                    <button>Crée ton avatar</button>
                 </div>
             </div>
         )
