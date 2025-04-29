@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUser } from "../context/UserInfoContext";
 import { tricksList } from "../data/TricksList";
 import styles from "./TricksContainer.module.css";
 
@@ -15,18 +16,56 @@ export const TricksContainer = () => {
   const [filter, setFilter] = useState<"Noob" | "Mid" | "Hard" | "all">("all");
   const [tricks, setTricks] = useState<Trick[]>(tricksList);
 
+  const { user, setUser } = useUser();
+
   const handleFilter = (newFilter: typeof filter) => setFilter(newFilter);
   const filteredTricksList =
     filter === "all"
       ? tricks
       : tricks.filter((trick) => trick.level === filter);
 
+  useEffect(() => {
+    if (!user) return;
+
+    const updatedTricks = tricksList.map((trick) => ({
+      ...trick,
+      isValidated: user.validatedTricks.includes(trick.id),
+    }));
+
+    setTricks(updatedTricks);
+  }, [user]);
+
   const handleValidation = (id: number) => {
-    setTricks((initialTricks) =>
-      initialTricks.map((trick) =>
-        trick.id === id ? { ...trick, isValidated: !trick.isValidated } : trick
-      )
-    );
+    const trickToValidate = tricks.find((trick) => trick.id === id);
+    if (!trickToValidate || !user) {
+      alert("Connecte toi pour sauvegarder ta progression");
+    } else {
+      const isAlreadyValidated = trickToValidate.isValidated;
+
+      setTricks((initialTricks) =>
+        initialTricks.map((trick) =>
+          trick.id === id
+            ? { ...trick, isValidated: !trick.isValidated }
+            : trick
+        )
+      );
+
+      if (isAlreadyValidated) {
+        setUser({
+          ...user,
+          xp: (user.xp || 0) - trickToValidate.xp,
+          validatedTricks: user.validatedTricks.filter(
+            (trickId) => trickId !== id
+          ),
+        });
+      } else {
+        setUser({
+          ...user,
+          xp: (user.xp || 0) + trickToValidate.xp,
+          validatedTricks: [...user.validatedTricks, id],
+        });
+      }
+    }
   };
 
   return (
@@ -68,8 +107,8 @@ export const TricksContainer = () => {
                 width="260"
                 height="150"
                 src={video}
+                frameBorder={0}
                 title="YouTube video player"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 loading="lazy"
