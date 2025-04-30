@@ -2,7 +2,6 @@
   margin: 0 auto 4rem;
 }
 
-
 .section {
   display: flex;
   height: 22rem;
@@ -28,10 +27,9 @@
 
 .logoAntoineRight,
 .logoAntoineLeft {
-  width: 300px;
-  max-width: initial;
+  width: 250px;
 }
- .logoAntoineRight{
+.logoAntoineRight {
   transform: scaleX(-1);
   background: none;
 }
@@ -92,7 +90,6 @@
     border-radius: 15px;
   }
 
-
   .logoAntoineLeft,
   .logoAntoineRight {
     max-width: 7rem;
@@ -106,17 +103,16 @@
     height: 30px;
   }
 
-}
+  .logoAntoineLeft,
+  .logoAntoineRight {
+    max-width: 7rem;
+    max-height: 10rem;
+  }
 
-.logoAntoineLeft,
-.logoAntoineRight {
-  max-width: 7rem;
-  max-height: 10rem;
-}
-
-.skate-buttonLeft,
-.skate-buttonRight {
-  font-size: 10px;
-  padding: 10px 15px;
-  height: 30px;
+  .skate-buttonLeft,
+  .skate-buttonRight {
+    font-size: 10px;
+    padding: 10px 15px;
+    height: 30px;
+  }
 }
