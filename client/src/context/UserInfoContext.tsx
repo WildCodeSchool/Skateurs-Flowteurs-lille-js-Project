@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, ReactNode, useContext, useState } from "react";
 
 type ProfilePicture = {
     img: string;
@@ -11,6 +11,8 @@ export type User = {
     defaultPicture: string;
     profilePicture: ProfilePicture;
     isConnected: boolean;
+    xp: number;
+    validatedTricks: number[];
 };
 
 
@@ -28,6 +30,8 @@ const emptyUser: User = {
         class: "noBackgroundSelected"
     },
     isConnected: false,
+    xp: 0,
+    validatedTricks: [],
 }
 
 const UserContext = createContext<UserContextType>({
@@ -38,15 +42,15 @@ const UserContext = createContext<UserContextType>({
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<User>(emptyUser);
 
-    return (
-        <UserContext.Provider value={{ user, setUser }}>
-            {children}
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export const useUser = (): UserContextType => {
-    const context = useContext(UserContext);
-    return context;
+  const context = useContext(UserContext);
+  return context;
 };
 
