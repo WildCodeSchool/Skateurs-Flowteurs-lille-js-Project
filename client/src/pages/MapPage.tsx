@@ -7,8 +7,9 @@ const MapPage = () => {
 
   return (
     <APIProvider apiKey={apiKey}>
+      <h1 className={styles.title}>SkateMap</h1>
+
       <div className={styles.map}>
-        <h1 className={styles.title}>SkateMap</h1>
         <MapContainer />
       </div>
     </APIProvider>
