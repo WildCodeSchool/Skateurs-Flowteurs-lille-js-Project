@@ -3,12 +3,12 @@ import { User, useUser } from '../context/UserInfoContext';
 import styles from "./Login.module.css"
 import { useState } from 'react';
 import { profileData } from '../data/Picture';
+import { ColorData } from '../data/Color';
 
 
 function Login() {
 
     const { setUser, user } = useUser();
-    const [isConnected, setIsConnected] = useState(false)
     const [isVisible, setIsVisible] = useState(false);
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -38,7 +38,6 @@ function Login() {
 
 
 
-    console.log(user)
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
             try {
@@ -54,8 +53,6 @@ function Login() {
                     defaultPicture: userInfo.picture,
                     isConnected: true,
                 } as User);
-                setIsConnected(true)
-                console.log(userInfo)
             } catch (error) {
                 console.error("Error fetching user info:", error);
             }
@@ -65,7 +62,7 @@ function Login() {
 
     if (!user.isConnected) {
         return (
-            <div className={isConnected ? styles.connectedContainer : styles.notConnectedContainer} >
+            <div className={user.isConnected ? styles.connectedContainer : styles.notConnectedContainer} >
                 <h3>Se connecter via Google</h3>
                 <button onClick={() => login()} className={styles.googleButton}>
                     <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google logo" />
@@ -105,10 +102,14 @@ function Login() {
                                     ))}
                                 </ul>
                                 <ul className={styles.colorList}>
-                                    <li onClick={() => setUserBackgroundColor("backgroundRed")}>Rouge</li>
-                                    <li onClick={() => setUserBackgroundColor("backgroundBlue")}>Bleu</li>
-                                    <li onClick={() => setUserBackgroundColor("backgroundGreen")}>Vert</li>
-                                    <li onClick={() => setUserBackgroundColor("backgroundYellow")}>Jaune</li>
+                                    {ColorData.map((color) => (
+                                        <li
+                                            key={color.id}
+                                            onClick={() => setUserBackgroundColor(color.class)}
+                                        >
+                                            {color.name}
+                                        </li>
+                                    ))}
                                 </ul>
                                 <button className={styles.validateButton} onClick={handleClick}>Valider</button>
                             </div>
