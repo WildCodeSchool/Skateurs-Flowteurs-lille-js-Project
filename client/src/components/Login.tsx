@@ -9,8 +9,6 @@ function Login() {
 
     const { setUser, user } = useUser();
     const [isConnected, setIsConnected] = useState(false)
-    const [profilePicture, setProfilePicture] = useState("https://static.vecteezy.com/system/resources/previews/020/911/740/non_2x/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png");
-    const [backgroundColorProfile, setBackgroundColorProfile] = useState<string | undefined>(undefined)
     const [isVisible, setIsVisible] = useState(false);
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -57,7 +55,6 @@ function Login() {
                     isConnected: true,
                 } as User);
                 setIsConnected(true)
-                setProfilePicture(userInfo.picture)
                 console.log(userInfo)
             } catch (error) {
                 console.error("Error fetching user info:", error);
