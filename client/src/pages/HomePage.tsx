@@ -4,7 +4,9 @@ import styles from "./HomePage.module.css";
 export const HomePage = () => {
   return (
     <div className={styles.HomePage}>
+
       <section>
+
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
@@ -15,6 +17,7 @@ export const HomePage = () => {
           à travers INTERPARCK
         </p>
       </section>
+
 
       <section className={styles.blue}>
         <Link to="/carte" className={styles.skateButtonRight}>
@@ -33,7 +36,7 @@ export const HomePage = () => {
         />
       </section>
 
-      <section>
+      <section className={styles.section}>
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"
@@ -50,7 +53,9 @@ export const HomePage = () => {
         </Link>
       </section>
 
+
       <section className={styles.blue}>
+
         <Link to="/profil" className={styles.skateButtonRight}>
           Profil
         </Link>
@@ -67,7 +72,7 @@ export const HomePage = () => {
         />
       </section>
 
-      <section>
+      <section className={styles.section}>
         <img
           src="./public/image-removebg-preview.png"
           alt="Logo Antoine Faucon"

@@ -1,12 +1,14 @@
 import { TricksContainer } from "../components/TricksContainer";
+import { useUser } from "../context/UserInfoContext";
 import styles from "./TricksDex.module.css";
 
 export const TricksDex = () => {
+  const { user } = useUser();
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>TricksDex</h1>
       <section className={styles.topSection}>
-        <section>
+        <section className={styles.intro}>
           <p>
             Explore les figures, regarde des tutos vidéo pour les apprendre, et
             ajoute-les à ton palmarès en les réussissant. <br /> Chaque trick
@@ -16,8 +18,11 @@ export const TricksDex = () => {
         </section>
         <section className={styles.xpSection}>
           <div className={styles.tricksAndXp}>
-            <p>XP : 100</p>
-            <p>Tricks : 1/30</p>
+            <p>XP : {user?.xp ?? 0}</p>
+            <p>
+              Tricks : {user?.validatedTricks ? user.validatedTricks.length : 0}
+              /30
+            </p>
           </div>
           <div className={styles.xpBar}>
             <div className={styles.progression}></div>
