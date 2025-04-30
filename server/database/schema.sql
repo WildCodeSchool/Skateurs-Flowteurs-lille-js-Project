@@ -16,7 +16,6 @@ CREATE TABLE users (
   profile_picture_id INT
 );
 
-
 CREATE TABLE tricks (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -26,15 +25,9 @@ CREATE TABLE tricks (
     isValidated BOOLEAN DEFAULT FALSE
 );
 
--- insert into tricks(id, name, video, level, xp, isValidated)
--- values(2 , "Kickflip", "url de la vidéo", "Noob", 120, 1);
-
 CREATE TABLE validated_tricks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   trick_id INT NOT NULL,
   validated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
--- insert into validated_tricks(id, user_id, trick_id, validated_at)
--- values(1, 1, 2 , "2025-04-30");
