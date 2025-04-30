@@ -25,7 +25,7 @@ export const Header = () => {
         <Link to="/" className="links" onClick={handleClick}>
           Home
         </Link>
-        <Link to="/carte" className="links">
+        <Link to="/carte" className="links" onClick={handleClick}>
           SkateMap
         </Link>
         <Link to="/tricksdex" className="links" onClick={handleClick}>
@@ -34,7 +34,9 @@ export const Header = () => {
         <Link to="/profil" className="links" onClick={handleClick}>
           Profil
         </Link>
-        <a>Contact</a>
+        <Link to="/contact" className="links" onClick={handleClick}>
+          Contact
+        </Link>
       </div>
     </>
   );
