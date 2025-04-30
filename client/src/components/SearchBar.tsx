@@ -44,7 +44,7 @@ const SearchBar = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
       name="search-spot"
       type="text"
       placeholder="Rechercher un spot..."
-      className={styles.input}
+      className={styles.SearchBar}
     />
   );
 };

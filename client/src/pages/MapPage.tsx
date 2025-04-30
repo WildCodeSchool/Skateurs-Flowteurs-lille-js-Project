@@ -17,8 +17,8 @@ const MapPage = () => {
 
   return (
     <APIProvider apiKey={apiKey} libraries={["places"]}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>SkateMap</h1>
+      <h1 className={styles.title}>SkateMap</h1>
+      <div className={styles.Search}>
         <SearchBar onPlaceSelect={handlePlaceSelect} />
       </div>
 
