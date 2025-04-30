@@ -10,11 +10,18 @@
   border-radius: 50%;
   box-shadow: 10px 5px 5px rgb(58, 55, 55);
 }
-.Contact {
+.contact {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10rem;
+  p {
+    margin-bottom: 90px;
+    span {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
 }
 
 @media (max-width: 768px) {
