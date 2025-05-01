@@ -6,11 +6,10 @@ interface PlaceAutocompleteProps {
   onPlaceSelect?: (place: google.maps.places.PlaceResult | null) => void;
 }
 
-const SearchBar = ({ onPlaceSelect = () => {} }: PlaceAutocompleteProps) => {
+const SearchBar = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [placeAutocomplete, setPlaceAutocomplete] = useState<
-    google.maps.places.Autocomplete | undefined
-  >(undefined);
+  const [placeAutocomplete, setPlaceAutocomplete] =
+    useState<google.maps.places.Autocomplete | null>(null);
 
   const places = useMapsLibrary("places");
 
@@ -30,7 +29,7 @@ const SearchBar = ({ onPlaceSelect = () => {} }: PlaceAutocompleteProps) => {
 
     const listener = placeAutocomplete.addListener("place_changed", () => {
       const place = placeAutocomplete.getPlace();
-      onPlaceSelect(place);
+      if (onPlaceSelect) onPlaceSelect(place);
     });
 
     return () => {
@@ -45,7 +44,7 @@ const SearchBar = ({ onPlaceSelect = () => {} }: PlaceAutocompleteProps) => {
       name="search-spot"
       type="text"
       placeholder="Rechercher un spot..."
-      className={styles.searchBar}
+      className={styles.SearchBar}
     />
   );
 };
