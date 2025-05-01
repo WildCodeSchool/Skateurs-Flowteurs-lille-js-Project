@@ -1,15 +1,15 @@
 .mapcontainer {
   width: 70%;
-  height: 70vh;
+  height: 100%;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 4px 10px 5px rgba(0, 0, 0, 0.2);
   display: flex;
-  justify-content: center;
   align-items: center;
   position: relative;
   margin-right: 15%;
   margin-left: 15%;
+  border-radius: 5px;
 }
 
 .map {

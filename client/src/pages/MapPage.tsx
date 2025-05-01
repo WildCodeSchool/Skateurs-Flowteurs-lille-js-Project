@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import MapContainer, { MapContainerRef } from "../components/MapContainer";
 import SearchBar from "../components/SearchBar";
@@ -8,23 +8,37 @@ const MapPage = () => {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const mapRef = useRef<MapContainerRef>(null);
 
+  const [markerPosition, setMarkerPosition] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
+
   const handlePlaceSelect = (place: google.maps.places.PlaceResult | null) => {
     const location = place?.geometry?.location;
-    if (location && mapRef.current) {
-      mapRef.current.panTo(location.lat(), location.lng());
+    if (location) {
+      const lat = location.lat();
+      const lng = location.lng();
+
+      // Déplace la carte
+      if (mapRef.current) {
+        mapRef.current.panTo(lat, lng);
+      }
+
+      // Affiche le marqueur
+      setMarkerPosition({ lat, lng });
     }
   };
 
   return (
     <APIProvider apiKey={apiKey} libraries={["places"]}>
       <h1 className={styles.title}>SkateMap</h1>
-      <div className={styles.Search}>
+      <section className={styles.boxComponents}>
         <SearchBar onPlaceSelect={handlePlaceSelect} />
-      </div>
-
-      <div className={styles.map}>
-        <MapContainer ref={mapRef} />
-      </div>
+        <MapContainer
+          ref={mapRef}
+          markerPosition={markerPosition ?? undefined}
+        />
+      </section>
     </APIProvider>
   );
 };
