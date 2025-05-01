@@ -2,22 +2,18 @@ import { forwardRef, useImperativeHandle } from "react";
 import { Map, Marker, useMap } from "@vis.gl/react-google-maps";
 import styles from "./MapContainer.module.css";
 
-// Interface pour les fonctions accessibles depuis la ref
 export interface MapContainerRef {
   panTo: (lat: number, lng: number) => void;
 }
 
-// Interface pour les props entrantes
 interface MapContainerProps {
   markerPosition?: { lat: number; lng: number };
 }
 
-// Composant avec ref et props
 const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
   ({ markerPosition }, ref) => {
     const map = useMap();
 
-    // Méthode exposée pour déplacer la carte
     useImperativeHandle(ref, () => ({
       panTo: (lat, lng) => {
         if (map) {

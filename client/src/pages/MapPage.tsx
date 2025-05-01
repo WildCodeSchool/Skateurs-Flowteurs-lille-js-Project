@@ -18,13 +18,9 @@ const MapPage = () => {
     if (location) {
       const lat = location.lat();
       const lng = location.lng();
-
-      // Déplace la carte
       if (mapRef.current) {
         mapRef.current.panTo(lat, lng);
       }
-
-      // Affiche le marqueur
       setMarkerPosition({ lat, lng });
     }
   };
