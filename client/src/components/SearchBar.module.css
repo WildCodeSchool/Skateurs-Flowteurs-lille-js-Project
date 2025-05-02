@@ -1,0 +1,12 @@
+.SearchBar {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 30px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  outline: none;
+}
