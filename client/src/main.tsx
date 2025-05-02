@@ -5,7 +5,8 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import { UserProvider } from "./context/UserInfoContext";
 import App from "./App";
 import { HomePage } from "./pages/HomePage";
-import { Profile } from "./pages/profile";
+import MapPage from "./pages/MapPage";
+import { Profile } from "./pages/Profile"
 import { TricksDex } from "./pages/TricksDex";
 import MapPage from "./pages/MapPage";
 
