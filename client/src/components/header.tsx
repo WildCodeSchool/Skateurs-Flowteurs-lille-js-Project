@@ -22,19 +22,21 @@ export const Header = () => {
         <button className={styles.cross}>
           <img src="./public/cross.svg" onClick={handleClick} />
         </button>
-        <Link to="/" className="links">
+        <Link to="/" className="links" onClick={handleClick}>
           Home
         </Link>
-        <Link to="/carte" className="links">
+        <Link to="/carte" className="links" onClick={handleClick}>
           SkateMap
         </Link>
-        <Link to="/tricksdex" className="links">
+        <Link to="/tricksdex" className="links" onClick={handleClick}>
           TricksDex
         </Link>
-        <Link to="/profil" className="links">
+        <Link to="/profil" className="links" onClick={handleClick}>
           Profil
         </Link>
-        <a>Contact</a>
+        <Link to="/contact" className="links" onClick={handleClick}>
+          Contact
+        </Link>
       </div>
     </>
   );

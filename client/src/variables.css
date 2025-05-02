@@ -6,3 +6,23 @@
   --titleFont: "Permanent Marker", sans-serif;
   --mainFont: "Montserrat", sans-serif;
 }
+
+.backgroundRed {
+  background-color: #ff6868;
+}
+
+.backgroundBlue {
+  background-color: #9aa1ff;
+}
+
+.backgroundGreen {
+  background-color: #3e673c;
+}
+
+.backgroundYellow {
+  background-color: #dbd660;
+}
+
+.noBackgroundSelected {
+  background-color: var(--lightColor);
+}

@@ -1,4 +1,4 @@
-.main {
+.mainContainer {
   padding: 1rem 2rem;
 }
 
@@ -7,38 +7,37 @@
   margin-bottom: 0.5rem;
 }
 
-.tricksAndXp {
+.topSection {
   display: flex;
-  justify-content: space-between;
-  font-family: var(--titleFont);
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
 }
 
-.xpBar {
-  height: 22px;
-  width: 100%;
-  background: var(--lightColor);
-  border-radius: 10px;
-
-  .progression {
-    height: 100%;
-    width: 10%;
-    background-color: var(--orangeColor);
-    border-radius: 10px 0 0 10px;
-  }
+.intro {
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 @media screen and (min-width: 880px) {
   .topSection {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10rem;
+    gap: 4rem;
+    height: fit-content;
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
   }
 
   .xpSection {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   .tricksAndXp {
