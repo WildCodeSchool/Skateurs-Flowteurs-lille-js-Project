@@ -1,0 +1,39 @@
+.tricksAndXp {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--titleFont);
+}
+
+.xpSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.xpBar {
+  height: 22px;
+  width: 100%;
+  background: var(--lightColor);
+  border-radius: 10px;
+
+  .progression {
+    height: 100%;
+    width: var(--xp-width);
+    transition: width 0.3s ease;
+    background-color: var(--orangeColor);
+    border-radius: 10px;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .xpSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tricksAndXp {
+    margin-top: 0;
+  }
+}

@@ -1,8 +1,9 @@
 .container {
   margin-top: 1.5rem;
+  margin-bottom: 74px;
   padding: 0;
   width: 100%;
-  height: 450px;
+  height: 70dvh;
   border-radius: 5px;
   background-color: var(--lightColor);
   display: flex;
@@ -11,7 +12,7 @@
 
 .tricksNav {
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   display: grid;
@@ -45,11 +46,10 @@
 }
 
 .ul {
-  max-height: 400px;
+  max-height: 65dvh;
   overflow-x: scroll;
   display: flex;
   flex-wrap: wrap;
-
   &::-webkit-scrollbar {
     display: none;
   }
