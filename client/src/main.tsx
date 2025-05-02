@@ -3,12 +3,14 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { UserProvider } from "./context/UserInfoContext";
-
 import App from "./App";
 import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
-import { Profile } from "./pages/Profile";
+import { Profile } from "./pages/Profile"
 import { TricksDex } from "./pages/TricksDex";
+import MapPage from "./pages/MapPage";
+
+import { Contact } from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/carte",
         element: <MapPage />,
+      },
+      {
+        path: "/Contact",
+        element: <Contact />,
       },
     ],
   },
