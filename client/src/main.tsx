@@ -6,10 +6,8 @@ import { UserProvider } from "./context/UserInfoContext";
 import App from "./App";
 import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
-import { Profile } from "./pages/Profile"
+import { Profile } from "./pages/profile";
 import { TricksDex } from "./pages/TricksDex";
-import MapPage from "./pages/MapPage";
-
 import { Contact } from "./pages/Contact";
 
 const router = createBrowserRouter([
