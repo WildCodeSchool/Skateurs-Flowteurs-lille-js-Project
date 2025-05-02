@@ -3,11 +3,11 @@ import { useState } from "react"
 import Login from "../components/Login"
 
 export const Profile = () => {
-  const [isTutoHidden, setIsTutoHidden] = useState(false);
+    const [isTutoHidden, setIsTutoHidden] = useState(false);
 
-  const handleClick = () => {
-    setIsTutoHidden(!isTutoHidden);
-  };
+    const handleClick = () => {
+        setIsTutoHidden(!isTutoHidden);
+    };
 
 
     return (
@@ -21,8 +21,7 @@ export const Profile = () => {
                 </p>
 
                 <div className={styles.connectionButton}>
-                    <h3>Se connecter via Google</h3>
-                    <Login/>
+                    <Login />
                 </div>
             </div>
         </>

@@ -7,7 +7,7 @@ import { UserProvider } from "./context/UserInfoContext";
 import App from "./App";
 import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
-import { Profile } from "./pages/profile";
+import { Profile } from "./pages/Profile";
 import { TricksDex } from "./pages/TricksDex";
 
 const router = createBrowserRouter([

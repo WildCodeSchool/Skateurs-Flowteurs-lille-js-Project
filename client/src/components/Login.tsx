@@ -1,40 +1,124 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import { useUser } from "../context/UserInfoContext";
-import styles from "./Login.module.css";
+import { useGoogleLogin } from '@react-oauth/google';
+import { User, useUser } from '../context/UserInfoContext';
+import styles from "./Login.module.css"
+import { useState } from 'react';
+import { profileData } from '../data/Picture';
+import { ColorData } from '../data/Color';
+
 
 function Login() {
-  const { setUser } = useUser();
 
-  const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      try {
-        const response = await fetch(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
-        );
-        const userInfo = await response.json();
+    const { setUser, user } = useUser();
+    const [isVisible, setIsVisible] = useState(false);
+    const handleClick = () => {
+        setIsVisible(!isVisible);
+    };
+
+
+    const setUserBackgroundColor = (element: string) => {
         setUser({
-          name: userInfo.name,
-          email: userInfo.email,
-          picture: userInfo.picture,
-          xp: userInfo.xp | 0,
-          validatedTricks: [],
-        });
-      } catch (error) {
-        console.error("Error fetching user info:", error);
-      }
-    },
-    onError: (error) => console.log("Login Failed:", error),
-  });
+            ...user,
+            profilePicture: {
+                ...user.profilePicture,
+                class: element,
+            },
+        } as User);
+    }
 
-  return (
-    <button onClick={() => login()} className={styles.googleButton}>
-      <img
-        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-        alt="google logo"
-      />
-    </button>
-  );
+    const setUserProfilePicture = (element: string) => {
+        setUser({
+            ...user,
+            profilePicture: {
+                ...user?.profilePicture,
+                img: element,
+            },
+        } as User);
+
+    }
+
+
+
+    const login = useGoogleLogin({
+        onSuccess: async tokenResponse => {
+            try {
+                const response = await fetch(
+                    'https://www.googleapis.com/oauth2/v3/userinfo',
+                    { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+                );
+                const userInfo = await response.json();
+                setUser({
+                    ...user,
+                    name: userInfo.name,
+                    email: userInfo.email,
+                    defaultPicture: userInfo.picture,
+                    isConnected: true,
+                } as User);
+            } catch (error) {
+                console.error("Error fetching user info:", error);
+            }
+        },
+        onError: error => console.log('Login Failed:', error),
+    });
+
+    if (!user.isConnected) {
+        return (
+            <div className={user.isConnected ? styles.connectedContainer : styles.notConnectedContainer} >
+                <h3>Se connecter via Google</h3>
+                <button onClick={() => login()} className={styles.googleButton}>
+                    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google logo" />
+                </button>
+            </div>
+        );
+    }
+    else {
+
+        return (
+            <>
+                {!isVisible ?
+                    <div>
+                        <div className={styles.connectedProfileContainer}>
+                            <h2>Mon Profil</h2>
+                            <div className={styles.profileContainer}>
+                                <img src={user?.profilePicture?.img ? user.profilePicture.img : user.defaultPicture} alt="default profile picture silhouette" className={user.profilePicture.class } />
+                                <button className={styles.validateButton} onClick={handleClick}>Crée ton avatar</button>
+                            </div>
+                        </div>
+                    </div> :
+
+                    <div>
+                        <div className={styles.avatarSelectionContainer}>
+                            <h2>Séléction de votre avatar</h2>
+                            <div className={styles.selectorListContainer}>
+                                <img src={user.profilePicture.img ? user.profilePicture.img : user.defaultPicture} className={user.profilePicture.class} />
+                                <ul className={styles.avatarList}>
+                                    {profileData.map((profile) => (
+                                        <li key={profile.id}>
+                                            <img
+                                                src={profile.name}
+                                                onClick={() => setUserProfilePicture(profile.name)}
+                                                alt={`Avatar ${profile.id}`}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                                <ul className={styles.colorList}>
+                                    {ColorData.map((color) => (
+                                        <li
+                                            key={color.id}
+                                            onClick={() => setUserBackgroundColor(color.class)}
+                                        >
+                                            {color.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <button className={styles.validateButton} onClick={handleClick}>Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </>
+        )
+    }
 }
 
 export default Login;
