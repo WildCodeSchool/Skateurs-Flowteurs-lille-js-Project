@@ -4,7 +4,7 @@ import styles from "./TricksDex.module.css";
 
 export const TricksDex = () => {
   return (
-    <main className={styles.main}>
+    <section className={styles.mainContainer}>
       <h1 className={styles.title}>TricksDex</h1>
       <section className={styles.topSection}>
         <section className={styles.intro}>
@@ -18,6 +18,6 @@ export const TricksDex = () => {
         <ProgressBar />
       </section>
       <TricksContainer />
-    </main>
+    </section>
   );
 };
