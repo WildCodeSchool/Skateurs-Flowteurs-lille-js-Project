@@ -1,4 +1,6 @@
   
+  USE INTERPARK
+
   CREATE TABLE profile_pictures (
   id INT AUTO_INCREMENT PRIMARY KEY,
   img VARCHAR(255) NOT NULL,
