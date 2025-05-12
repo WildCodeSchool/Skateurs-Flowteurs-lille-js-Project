@@ -1,3 +1,4 @@
+USE INTERPARK
   
   CREATE TABLE profile_pictures (
   id INT AUTO_INCREMENT PRIMARY KEY,
