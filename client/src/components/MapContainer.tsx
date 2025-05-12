@@ -1,5 +1,5 @@
 import { useImperativeHandle } from "react";
-import { Map, Marker, useMap } from "@vis.gl/react-google-maps";
+import { Map, AdvancedMarker, useMap } from "@vis.gl/react-google-maps";
 import styles from "./MapContainer.module.css";
 
 export interface MapContainerRef {
@@ -32,7 +32,7 @@ const MapContainer = ({ markerPosition, ref }: MapContainerProps) => {
         gestureHandling="greedy"
         disableDefaultUI={true}
       >
-        {markerPosition && <Marker position={markerPosition} />}
+        {markerPosition && <AdvancedMarker position={markerPosition} />}
       </Map>
     </div>
   );
