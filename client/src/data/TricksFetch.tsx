@@ -1,7 +1,9 @@
 import { TrickModel } from "../model/TrickModel";
 
+const rootUrl = import.meta.env.VITE_ROOT_URL;
+
 export const TricksFetch = async (): Promise<TrickModel[]> => {
-  const response = await fetch("http://localhost:3310/api/tricks");
+  const response = await fetch(`${rootUrl}/api/tricks`);
   if (!response.ok) {
     throw new Error("Erreur lors du chargement des tricks");
   }

@@ -6,22 +6,23 @@ import {
   useState,
 } from "react";
 import { TricksFetch } from "../data/TricksFetch";
+import { TrickModel } from "../model/TrickModel";
 
-export type Trick = {
-  id: number;
-  name: string;
-  video: string;
-  level: string;
-  xp: number;
-  isValidated: boolean;
-};
+// export type Trick = {
+//   id: number;
+//   name: string;
+//   video: string;
+//   level: string;
+//   xp: number;
+//   isValidated: boolean;
+// };
 
 type TricksContextType = {
-  tricks: Trick[];
-  setTricks: React.Dispatch<React.SetStateAction<Trick[]>>;
+  tricks: TrickModel[];
+  setTricks: React.Dispatch<React.SetStateAction<TrickModel[]>>;
 };
 
-const emptyTrick: Trick = {
+const emptyTrick: TrickModel = {
   id: 0,
   name: "",
   video: "",
@@ -36,7 +37,7 @@ const TricksContext = createContext<TricksContextType>({
 });
 
 export const TricksProvider = ({ children }: { children: ReactNode }) => {
-  const [tricks, setTricks] = useState<Trick[]>([emptyTrick]);
+  const [tricks, setTricks] = useState<TrickModel[]>([emptyTrick]);
 
   useEffect(() => {
     const getTricks = async () => {
