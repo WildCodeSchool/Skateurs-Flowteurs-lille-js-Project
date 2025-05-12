@@ -141,4 +141,26 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+const update: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+
+    const updatedUser = {
+      id: userId,
+      name: req.body.name,
+      email: req.body.email,
+      xp: req.body.xp,
+      isConnected: req.body.isConnected,
+      default_picture: req.body.default_picture,
+      profile_picture_id: req.body.profile_picture_id,
+    };
+
+    const userUpdate = await userRepository.update(updatedUser);
+
+    res.status(200).json({ userUpdate });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, add, update };

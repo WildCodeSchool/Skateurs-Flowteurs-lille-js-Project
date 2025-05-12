@@ -16,6 +16,7 @@ router.get("/api/tricks/:id", trickAction.read);
 router.get("/api/users", userAction.browse);
 router.get("/api/users/:id", userAction.read);
 router.post("/api/users", userAction.add);
+router.put("/api/users/:id", userAction.update);
 
 /* ************************************************************************* */
 

@@ -57,9 +57,25 @@ class UserRepository {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  // async update(item: Item) {
-  //   ...
-  // }
+  async update(user: User) {
+    const [result] = await databaseClient.query<Result>(
+      `
+    UPDATE users
+    SET name = ?, email = ?, xp = ?, isConnected = ?, default_picture = ?, profile_picture_id = ?
+    WHERE id = ?
+    `,
+      [
+        user.name,
+        user.email,
+        user.xp,
+        user.isConnected,
+        user.default_picture,
+        user.profile_picture_id,
+        user.id,
+      ]
+    );
+    return result.affectedRows === 1;
+  }
 
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an item by its ID
