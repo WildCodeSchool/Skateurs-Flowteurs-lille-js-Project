@@ -16,7 +16,7 @@ export const TrickCard = ({
   const { user } = useUser();
   return (
     <li key={trick.id} className={styles.trickCard}>
-      {trick.video ? (
+      {trick.video &&(
         <iframe
           width="260"
           height="150"
@@ -28,7 +28,7 @@ export const TrickCard = ({
           loading="lazy"
           allowFullScreen
         ></iframe>
-      ) : null}
+      )}
       <h2>{trick.name}</h2>
       <p>Niveau : {trick.level}</p>
       <p>Gain d'xp : {trick.xp}</p>
