@@ -2,20 +2,31 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-type Item = {
+type User = {
   id: number;
-  title: string;
-  user_id: number;
+  name: string;
+  email: string;
+  xp: number;
+  isConnected: boolean;
+  default_picture: string;
+  profile_picture_id: number;
 };
 
-class ItemRepository {
+class UserRepository {
   // The C of CRUD - Create operation
 
-  async create(item: Omit<Item, "id">) {
+  async create(user: Omit<User, "id">) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into item (title, user_id) values (?, ?)",
-      [item.title, item.user_id],
+      "insert into users (name, email, xp, isConnected, default_picture, profile_picture_id) values (?, ?, ?, ?, ?, ?)",
+      [
+        user.name,
+        user.email,
+        user.xp,
+        user.isConnected,
+        user.default_picture,
+        user.profile_picture_id,
+      ]
     );
 
     // Return the ID of the newly inserted item
@@ -27,20 +38,20 @@ class ItemRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      "select * from item where id = ?",
-      [id],
+      "select * from users where id = ?",
+      [id]
     );
 
     // Return the first row of the result, which represents the item
-    return rows[0] as Item;
+    return rows[0] as User;
   }
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
-    const [rows] = await databaseClient.query<Rows>("select * from item");
+    const [rows] = await databaseClient.query<Rows>("select * from users");
 
     // Return the array of items
-    return rows as Item[];
+    return rows as User[];
   }
 
   // The U of CRUD - Update operation
@@ -58,4 +69,4 @@ class ItemRepository {
   // }
 }
 
-export default new ItemRepository();
+export default new UserRepository();
