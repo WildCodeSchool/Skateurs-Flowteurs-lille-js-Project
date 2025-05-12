@@ -7,8 +7,8 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define tricks and users-related routes
-import trickAction from "./modules/item/trickAction";
-import userAction from "./modules/item/userAction";
+import trickAction from "./modules/tricks/trickAction";
+import userAction from "./modules/users/userAction";
 
 router.get("/api/tricks", trickAction.browse);
 router.get("/api/tricks/:id", trickAction.read);
