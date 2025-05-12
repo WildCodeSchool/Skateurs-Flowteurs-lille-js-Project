@@ -11,8 +11,8 @@ export const HomePage = () => {
           className={styles.logoAntoineRight}
         />
         <p className={styles.BubbleRight}>
-          Salut, c'est Antoine Faucon. Je suis la pour te guider étape par étape
-          à travers INTERPARCK
+          Salut, c'est Antoine Faucon ! Je suis la pour te guider étape par étape
+          à travers INTERPARK.
         </p>
       </section>
 
