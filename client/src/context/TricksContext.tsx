@@ -8,15 +8,6 @@ import {
 import { TricksFetch } from "../data/TricksFetch";
 import { TrickModel } from "../model/TrickModel";
 
-// export type Trick = {
-//   id: number;
-//   name: string;
-//   video: string;
-//   level: string;
-//   xp: number;
-//   isValidated: boolean;
-// };
-
 type TricksContextType = {
   tricks: TrickModel[];
   setTricks: React.Dispatch<React.SetStateAction<TrickModel[]>>;
