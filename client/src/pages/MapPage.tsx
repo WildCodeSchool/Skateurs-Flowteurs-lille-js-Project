@@ -12,16 +12,20 @@ const MapPage = () => {
     lat: number;
     lng: number;
   } | null>(null);
+  const [showCircle, setShowCircle] = useState(false);
 
   const handlePlaceSelect = (place: google.maps.places.PlaceResult | null) => {
     const location = place?.geometry?.location;
     if (location) {
       const lat = location.lat();
       const lng = location.lng();
+
       if (mapRef.current) {
         mapRef.current.panTo(lat, lng);
       }
+
       setMarkerPosition({ lat, lng });
+      setShowCircle(true);
     }
   };
 
@@ -33,6 +37,7 @@ const MapPage = () => {
         <MapContainer
           ref={mapRef}
           markerPosition={markerPosition ?? undefined}
+          showCircle={showCircle}
         />
       </section>
     </APIProvider>
