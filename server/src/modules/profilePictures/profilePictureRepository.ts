@@ -2,21 +2,21 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-type User = {
+type ProfilePicture = {
   id: number;
-  name: string;
-  email: string;
-  xp: number;
+  img: string;
+  class: string;
+  user_id: number;
 };
 
-class UserRepository {
+class ProfilePictureRepository {
   // The C of CRUD - Create operation
 
-  async create(user: Omit<User, "id">) {
+  async create(profilePicture: Omit<ProfilePicture, "id">) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into users (name, email, xp) values (?, ?, ?)",
-      [user.name, user.email, user.xp ?? 0]
+      "insert into profile_pictures (img, class, user_id) values (?, ?, ?)",
+      [profilePicture.img, profilePicture.class, profilePicture.user_id]
     );
 
     // Return the ID of the newly inserted item
@@ -25,36 +25,37 @@ class UserRepository {
 
   // The Rs of CRUD - Read operations
 
-  async read(email: string) {
+  async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT * FROM users LEFT JOIN profile_pictures ON users.id = profile_pictures.user_id WHERE users.email = ? LIMIT 100`,
-      [email]
+      `SELECT * FROM profile_pictures LIMIT 100`
     );
 
     // Return the first row of the result, which represents the item
-    return rows[0] as User;
+    return rows[0] as ProfilePicture;
   }
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
-    const [rows] = await databaseClient.query<Rows>("select * from users");
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from profile_pictures"
+    );
 
     // Return the array of items
-    return rows as User[];
+    return rows as ProfilePicture[];
   }
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async update(user: User) {
+  async update(profile_pictures: ProfilePicture) {
     const [result] = await databaseClient.query<Result>(
       `
-    UPDATE users
-    SET name = ?, email = ?, xp = ?
+    UPDATE profile_pictures
+    SET img = ?, class = ?, user_id = ?
     WHERE id = ?
     `,
-      [user.name, user.email, user.xp, user.id]
+      [profile_pictures.img, profile_pictures.class, profile_pictures.user_id]
     );
     return result.affectedRows === 1;
   }
@@ -67,4 +68,4 @@ class UserRepository {
   // }
 }
 
-export default new UserRepository();
+export default new ProfilePictureRepository();
