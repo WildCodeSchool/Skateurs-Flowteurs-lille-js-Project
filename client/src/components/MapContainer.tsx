@@ -20,7 +20,7 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
       panTo: (lat, lng) => {
         if (map) {
           map.panTo({ lat, lng });
-          map.setZoom(14);
+          map.setZoom(12);
         }
       },
     }));
@@ -63,7 +63,7 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
           mapId={import.meta.env.VITE_REACT_APP_MAP_ID}
           className={styles.map}
           defaultCenter={{ lat: 50.62925, lng: 3.057256 }}
-          defaultZoom={10}
+          defaultZoom={8}
           gestureHandling="greedy"
           disableDefaultUI={true}
         >
