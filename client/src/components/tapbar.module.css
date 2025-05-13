@@ -1,5 +1,4 @@
 .tapbar {
-  display: flex;
   background-color: #d7dad7;
   display: flex;
   justify-content: space-around;
@@ -8,10 +7,14 @@
   bottom: 0;
   width: 100%;
   z-index: 5;
+  height: 8%;
 }
 
 .tapbar img {
   background-color: #d7dad7;
+  height: 3.2rem;
+  width: 3.2rem;
+  overflow: hidden;
 }
 
 .buttonNav {
