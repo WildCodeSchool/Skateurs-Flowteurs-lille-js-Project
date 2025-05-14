@@ -28,7 +28,7 @@ class UserRepository {
   async read(email: string) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT * FROM users LEFT JOIN profile_pictures ON users.id = profile_pictures.user_id WHERE users.email = ? LIMIT 100`,
+      `SELECT U.id, U.name, U.email, U.xp, P.class, P.img FROM users as U LEFT JOIN profile_pictures as P ON U.id = P.user_id WHERE U.email = ?`,
       [email]
     );
 

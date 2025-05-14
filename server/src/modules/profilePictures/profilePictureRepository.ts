@@ -15,7 +15,7 @@ class ProfilePictureRepository {
   async create(profilePicture: Omit<ProfilePicture, "id">) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into profile_pictures (img, class, user_id) values (?, ?, ?)",
+      "INSERT INTO profile_pictures (img, class, user_id) VALUES (?, ?, ?)",
       [profilePicture.img, profilePicture.class, profilePicture.user_id]
     );
 
@@ -52,12 +52,16 @@ class ProfilePictureRepository {
     const [result] = await databaseClient.query<Result>(
       `
     UPDATE profile_pictures
-    SET img = ?, class = ?, user_id = ?
-    WHERE id = ?
+    SET img = ?, class = ?, id = ?
+    WHERE user_id = ?
     `,
-      [profile_pictures.img, profile_pictures.class, profile_pictures.user_id]
+      [
+        profile_pictures.img,
+        profile_pictures.class,
+        profile_pictures.id,
+        profile_pictures.user_id,
+      ]
     );
-    return result.affectedRows === 1;
   }
 
   // The D of CRUD - Delete operation

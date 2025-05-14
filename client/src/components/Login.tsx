@@ -6,6 +6,8 @@ import { profileData } from "../data/Picture";
 import styles from "./Login.module.css";
 import { ProgressBar } from "./ProgressBar";
 
+const rootUrl = import.meta.env.VITE_ROOT_URL;
+
 function Login() {
   const { setUser, user } = useUser();
   const [isVisible, setIsVisible] = useState(false);
@@ -21,6 +23,16 @@ function Login() {
         class: element,
       },
     } as User);
+    fetch(`${rootUrl}/api/profilePictures`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        class: element,
+      }),
+    });
   };
 
   const setUserProfilePicture = (element: string) => {
@@ -31,9 +43,17 @@ function Login() {
         img: element,
       },
     } as User);
+    fetch(`${rootUrl}/api/profilePictures`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: user.id,
+        img: element,
+      }),
+    });
   };
-
-  const rootUrl = import.meta.env.VITE_ROOT_URL;
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {

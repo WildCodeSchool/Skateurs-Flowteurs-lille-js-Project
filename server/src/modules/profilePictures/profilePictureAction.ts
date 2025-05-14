@@ -124,10 +124,9 @@ const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the user data from the request body
     const newProfilePicture = {
-      id: req.body,
-      img: req.body.name,
-      class: req.body.email,
-      user_id: req.body.xp,
+      img: req.body.img,
+      class: req.body.class,
+      user_id: req.body.user_id,
     };
 
     // Create the user
@@ -143,7 +142,7 @@ const add: RequestHandler = async (req, res, next) => {
 
 const update: RequestHandler = async (req, res, next) => {
   try {
-    const profilePictureIdId = Number(req.params.id);
+    const profilePictureId = Number(req.params.id);
 
     const updatedProfilePicture = {
       id: req.body.id,
