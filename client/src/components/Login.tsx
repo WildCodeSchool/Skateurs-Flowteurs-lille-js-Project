@@ -4,6 +4,7 @@ import styles from "./Login.module.css"
 import { useState } from 'react';
 import { profileData } from '../data/Picture';
 import { ColorData } from '../data/Color';
+import { ProgressBar } from './ProgressBar';
 
 
 function Login() {
@@ -82,6 +83,7 @@ function Login() {
                                 <img src={user?.profilePicture?.img ? user.profilePicture.img : user.defaultPicture} alt="default profile picture silhouette" className={user.profilePicture.class } />
                                 <button className={styles.validateButton} onClick={handleClick}>Crée ton avatar</button>
                             </div>
+                            <ProgressBar/>
                         </div>
                     </div> :
 

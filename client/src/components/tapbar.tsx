@@ -13,7 +13,7 @@ export const Tapbar = () => {
       <Link to="/profil" className={styles.buttonNav}>
         <img src="./public/profileIcon.png" />
       </Link>
-      <Link to="/" className={styles.buttonNav}>
+      <Link to="/contact" className={styles.buttonNav}>
         <img src="./public/contactIcon.png" />
       </Link>
     </nav>

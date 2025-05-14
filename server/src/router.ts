@@ -6,12 +6,17 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Define item-related routes
-import itemActions from "./modules/item/itemActions";
+// Define tricks and users-related routes
+import trickAction from "./modules/tricks/trickAction";
+import userAction from "./modules/users/userAction";
 
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+router.get("/api/tricks", trickAction.browse);
+router.get("/api/tricks/:id", trickAction.read);
+
+router.get("/api/users", userAction.browse);
+router.get("/api/users/:id", userAction.read);
+router.post("/api/users", userAction.add);
+router.put("/api/users/:id", userAction.update);
 
 /* ************************************************************************* */
 

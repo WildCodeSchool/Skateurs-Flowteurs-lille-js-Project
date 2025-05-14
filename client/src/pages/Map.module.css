@@ -16,6 +16,10 @@
   .boxComponents {
     flex-direction: column-reverse;
   }
+
+  .title{
+    margin-left: 5%;
+  }
 }
 weatherSection {
   margin-top: 2rem;
