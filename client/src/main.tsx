@@ -10,7 +10,6 @@ import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
 import { Profile } from "./pages/Profile";
 import { TricksDex } from "./pages/TricksDex";
-import Weather from "./components/weather";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +35,6 @@ const router = createBrowserRouter([
         path: "/Contact",
         element: <Contact />,
       },
-      { path: "/meteo", element: <Weather /> },
     ],
   },
 ]);
