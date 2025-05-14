@@ -21,7 +21,9 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
   ({ markerPosition, showCircle }, ref) => {
     const map = useMap();
     const circleRef = useRef<google.maps.Circle | null>(null);
-    const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
+    const [markers, setMarkers] = useState<
+      google.maps.marker.AdvancedMarkerElement[]
+    >([]);
 
     useImperativeHandle(ref, () => ({
       panTo: (lat, lng) => {
@@ -51,11 +53,9 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
           circleRef.current.setCenter(markerPosition);
           circleRef.current.setRadius(5000);
         }
-      } else {
-        if (circleRef.current) {
-          circleRef.current.setMap(null);
-          circleRef.current = null;
-        }
+      } else if (circleRef.current) {
+        circleRef.current.setMap(null);
+        circleRef.current = null;
       }
 
       const service = new google.maps.places.PlacesService(map);
@@ -80,16 +80,12 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
             return distance <= 5000;
           });
 
-          markers.forEach((marker) => marker.setMap(null));
-
           const newMarkers = filteredResults.map((place) => {
-            const marker = new google.maps.Marker({
+            return new google.maps.marker.AdvancedMarkerElement({
               map,
-              position: place.geometry?.location,
+              position: place.geometry?.location!,
               title: place.name,
             });
-
-            return marker;
           });
 
           setMarkers(newMarkers);
@@ -97,7 +93,9 @@ const MapContainer = forwardRef<MapContainerRef, MapContainerProps>(
       });
 
       return () => {
-        markers.forEach((marker) => marker.setMap(null));
+        markers.forEach((marker) => {
+          marker.map = null;
+        });
       };
     }, [map, markerPosition, showCircle]);
 
