@@ -128,7 +128,7 @@ const add: RequestHandler = async (req, res, next) => {
       class: req.body.class,
       user_id: req.body.user_id,
     };
-
+    console.log(newProfilePicture);
     // Create the user
     const insertId = await profilePictureRepository.create(newProfilePicture);
 

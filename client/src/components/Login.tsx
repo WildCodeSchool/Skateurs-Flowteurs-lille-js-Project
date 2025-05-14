@@ -33,16 +33,6 @@ function Login() {
         img: element,
       },
     } as User);
-    fetch(`${rootUrl}/api/profilePictures`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: user.id,
-        img: element,
-      }),
-    });
   };
 
   const login = useGoogleLogin({
@@ -76,8 +66,23 @@ function Login() {
               xp: 0,
             }),
           });
-
           userData = await newUser.json();
+          const newProfilePicture = await fetch(
+            `${rootUrl}/api/profilePictures`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                img: null,
+                class: null,
+                user_id: userData.insertId,
+              }),
+            }
+          );
+          const response = await newProfilePicture.json();
+          console.log(response);
         } else {
           userData = await checkUser.json();
         }
