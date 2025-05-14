@@ -17,3 +17,8 @@
     flex-direction: column-reverse;
   }
 }
+weatherSection {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}

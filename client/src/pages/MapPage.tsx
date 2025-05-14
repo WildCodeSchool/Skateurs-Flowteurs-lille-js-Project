@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import MapContainer, { MapContainerRef } from "../components/MapContainer";
 import SearchBar from "../components/SearchBar";
+import Weather from "../components/weather";
 import styles from "./Map.module.css";
 
 const MapPage = () => {
@@ -28,6 +29,9 @@ const MapPage = () => {
   return (
     <APIProvider apiKey={apiKey} libraries={["places"]}>
       <h1 className={styles.title}>SkateMap</h1>
+      <section className={styles.weatherSection}>
+        <Weather lat={markerPosition?.lat} lng={markerPosition?.lng} />
+      </section>
       <section className={styles.boxComponents}>
         <SearchBar onPlaceSelect={handlePlaceSelect} />
         <MapContainer
