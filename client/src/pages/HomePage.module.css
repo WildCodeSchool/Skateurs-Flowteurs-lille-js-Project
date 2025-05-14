@@ -102,4 +102,9 @@
     padding: 10px 15px;
     height: 30px;
   }
+
+  .section,
+  .blue{
+    padding: 0 1rem;
+  }
 }
