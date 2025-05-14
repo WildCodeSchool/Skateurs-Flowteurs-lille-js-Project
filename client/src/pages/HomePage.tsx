@@ -45,7 +45,7 @@ export const HomePage = () => {
           trick pour gagner de l'XP. Let's go progresser !
         </p>
 
-        <Link to="/tricksdex" className={styles.skateButtonRight}>
+        <Link to="/tricksdex" className={styles.skateButtonLeft}>
           TricksDex
         </Link>
       </section>

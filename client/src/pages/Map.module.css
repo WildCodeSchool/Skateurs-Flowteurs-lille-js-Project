@@ -16,4 +16,8 @@
   .boxComponents {
     flex-direction: column-reverse;
   }
+
+  .title{
+    margin-left: 5%;
+  }
 }

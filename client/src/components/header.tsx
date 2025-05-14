@@ -16,7 +16,7 @@ export const Header = () => {
           <img src="./public/BButton.svg" onClick={handleClick} />
         </button>
         <img src="./public/logo.png" alt="cow on a skateboard" />
-        <h1>InterPark</h1>
+        <Link to="/" className={styles.mainHeaderTitle}>InterPark</Link>
       </nav>
       <div className={isVisible ? styles.burgerBarOn : styles.burgerBarOff}>
         <button className={styles.cross}>

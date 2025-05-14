@@ -3,6 +3,12 @@ a {
   color: #d7dad7;
 }
 
+.mainHeaderTitle{
+  font-family: "Permanent Marker";
+  color: #d7dad7;
+  font-size: 2rem;
+}
+
 .HeaderNav {
   display: flex;
   flex-direction: row;
