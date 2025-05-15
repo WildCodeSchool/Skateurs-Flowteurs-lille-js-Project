@@ -21,3 +21,8 @@
     margin-left: 5%;
   }
 }
+weatherSection {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}

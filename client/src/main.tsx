@@ -8,7 +8,7 @@ import { UserProvider } from "./context/UserInfoContext";
 import { Contact } from "./pages/Contact";
 import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
-import { Profile } from "./pages/profile";
+import { Profile } from "./pages/Profile";
 import { TricksDex } from "./pages/TricksDex";
 
 const router = createBrowserRouter([
