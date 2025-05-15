@@ -5,6 +5,11 @@ export type ProfilePicture = {
   class: string | null;
 };
 
+export type Trick = {
+  isValidated: boolean;
+  id: number;
+};
+
 export type User = {
   id: number;
   name: string;
@@ -13,6 +18,7 @@ export type User = {
   profilePicture: ProfilePicture;
   isConnected: boolean;
   xp: number;
+  tricks: Trick[];
 };
 
 type UserContextType = {
@@ -32,6 +38,7 @@ const emptyUser: User = {
   },
   isConnected: false,
   xp: 0,
+  tricks: [],
 };
 
 const UserContext = createContext<UserContextType>({

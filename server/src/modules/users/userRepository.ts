@@ -9,6 +9,21 @@ type User = {
   xp: number;
 };
 
+type Trick = {
+  isValidated: boolean;
+  id: number;
+};
+
+type UserData = {
+  id: number;
+  name: string;
+  email: string;
+  xp: number;
+  img: string;
+  class: string;
+  tricks: Trick[];
+};
+
 class UserRepository {
   // The C of CRUD - Create operation
 
@@ -28,12 +43,30 @@ class UserRepository {
   async read(email: string) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT U.id, U.name, U.email, U.xp, P.class, P.img FROM users as U LEFT JOIN profile_pictures as P ON U.id = P.user_id WHERE U.email = ?`,
+      `SELECT U.id, U.name, U.email, U.xp, P.class, P.img, V.is_validated, V.trick_id FROM users as U LEFT JOIN profile_pictures as P ON U.id = P.user_id LEFT JOIN validated_tricks as V ON U.id = V.user_id WHERE U.email = ?`,
       [email]
     );
+    const user: UserData = {
+      id: rows[0].id,
+      name: rows[0].name,
+      email: rows[0].email,
+      xp: rows[0].xp,
+      img: rows[0].img,
+      class: rows[0].class,
+      tricks: [],
+    };
 
+    if (rows.length > 1) {
+      rows.map((row) => {
+        user.tricks.push({
+          isValidated: row.is_validated === 1 ? true : false,
+          id: row.trick_id,
+        });
+      });
+    }
+    console.log([rows]);
     // Return the first row of the result, which represents the item
-    return rows[0] as User;
+    return user as User;
   }
 
   async readAll() {
