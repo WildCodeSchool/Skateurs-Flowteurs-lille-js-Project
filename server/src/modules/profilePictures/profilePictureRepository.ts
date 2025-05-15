@@ -48,19 +48,14 @@ class ProfilePictureRepository {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async update(profile_pictures: ProfilePicture) {
+  async update(profilePicture: Omit<ProfilePicture, "id">) {
     const [result] = await databaseClient.query<Result>(
       `
     UPDATE profile_pictures
-    SET img = ?, class = ?, id = ?
+    SET img = ?, class = ?
     WHERE user_id = ?
     `,
-      [
-        profile_pictures.img,
-        profile_pictures.class,
-        profile_pictures.id,
-        profile_pictures.user_id,
-      ]
+      [profilePicture.img, profilePicture.class, profilePicture.user_id]
     );
   }
 

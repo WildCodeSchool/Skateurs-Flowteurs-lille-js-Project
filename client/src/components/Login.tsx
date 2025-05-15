@@ -45,15 +45,15 @@ function Login() {
         } as User);
     };
 
-    const setUserProfilePicture = (element: string) => {
-        setUser({
-            ...user,
-            profilePicture: {
-                ...user?.profilePicture,
-                img: element,
-            },
-        } as User);
-    }; 
+  const setUserProfilePicture = (element: string) => {
+    setUser({
+      ...user,
+      profilePicture: {
+        ...user?.profilePicture,
+        img: element,
+      },
+    } as User);
+  };
 
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -74,40 +74,38 @@ function Login() {
 
                 let userData;
 
-                if (checkUser.status === 404) {
-                    const newUser = await fetch(`${rootUrl}/api/users`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            name: userInfo.name,
-                            email: userInfo.email,
-                            xp: 0,
-                        }),
-                    });
-
-                    userData = await newUser.json();
-                    //as I get the new id from user on db, I POST a new profile_picture entry with user_id and img + class with null values
-
-                    const response = await fetch(`${rootUrl}/api/profilePictures`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            user_id: userData.insertId,
-                            img: null,
-                            class: null,
-                        }),
-                    });
-
-                    const result = response.json()
-
-                    console.log(result)
-                } else {
-                    userData = await checkUser.json();
-                }
+        if (checkUser.status === 404) {
+          const newUser = await fetch(`${rootUrl}/api/users`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: userInfo.name,
+              email: userInfo.email,
+              xp: 0,
+            }),
+          });
+          userData = await newUser.json();
+          const newProfilePicture = await fetch(
+            `${rootUrl}/api/profilePictures`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                img: null,
+                class: null,
+                user_id: userData.insertId,
+              }),
+            }
+          );
+          const response = await newProfilePicture.json();
+          console.log(response);
+        } else {
+          userData = await checkUser.json();
+        }
 
                 setUser({
                     ...userData,

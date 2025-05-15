@@ -22,7 +22,7 @@ router.put("/api/users/:id", userAction.update);
 router.get("/api/profilePictures", profilePictureAction.browse);
 router.post("/api/profilePictures", profilePictureAction.add);
 router.get("/api/profilePictures/:id", profilePictureAction.read);
-router.put("/api/profilePictures", profilePictureAction.update);
+router.patch("/api/profilePictures", profilePictureAction.update);
 
 /* ************************************************************************* */
 
