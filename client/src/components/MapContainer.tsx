@@ -44,6 +44,7 @@ export default function MapContainer({
   useEffect(() => {
     if (!map || !markerPosition) return;
 
+    // Gérer le cercle
     if (showCircle) {
       if (!circleRef.current) {
         circleRef.current = new google.maps.Circle({
@@ -65,10 +66,10 @@ export default function MapContainer({
       circleRef.current = null;
     }
 
-    markersRef.current.forEach((marker) => {
-      marker.map = null;
-    });
+    // Retirer les anciens marqueurs
+    markersRef.current.forEach((m) => (m.map = null));
 
+    // Recherche des skateparks à proximité
     const service = new google.maps.places.PlacesService(map);
     const request: google.maps.places.PlaceSearchRequest = {
       location: markerPosition,
@@ -78,25 +79,26 @@ export default function MapContainer({
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        const filteredResults = results.filter((place) => {
-          const placeLocation = place.geometry?.location;
-          if (!placeLocation) return false;
-          const distance =
-            google.maps.geometry.spherical.computeDistanceBetween(
-              markerPosition,
-              placeLocation
-            );
-          return distance <= 5000;
+        const filtered = results.filter((place) => {
+          const loc = place.geometry?.location;
+          if (!loc) return false;
+          const dist = google.maps.geometry.spherical.computeDistanceBetween(
+            markerPosition,
+            loc
+          );
+          return dist <= 5000;
         });
 
-        const newMarkers = filteredResults.map((place) => {
+        const newMarkers = filtered.map((place) => {
           const marker = new google.maps.marker.AdvancedMarkerElement({
             map,
             position: place.geometry!.location!,
             title: place.name,
+            gmpClickable: true, // rend l’élément cliquable
           });
 
-          marker.addListener("click", () => {
+          // Écouteur sur l’événement personnalisé
+          marker.addEventListener("gmp-click", () => {
             setSelectedPlace(place);
             map.panTo(place.geometry!.location!);
           });
@@ -121,7 +123,7 @@ export default function MapContainer({
       >
         {markerPosition && <AdvancedMarker position={markerPosition} />}
 
-        {selectedPlace && selectedPlace.geometry?.location && (
+        {selectedPlace?.geometry?.location && (
           <InfoWindow
             position={selectedPlace.geometry.location}
             onCloseClick={() => setSelectedPlace(null)}
@@ -135,7 +137,11 @@ export default function MapContainer({
                     : "/public/default.jpg"
                 }
                 alt={selectedPlace.name}
-                style={{ width: "100%", height: "auto", marginBottom: "8px" }}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  marginBottom: "8px",
+                }}
                 onError={(e) => {
                   e.currentTarget.src = "/default.jpg";
                 }}
@@ -143,19 +149,22 @@ export default function MapContainer({
               <button
                 style={{ padding: "8px 12px", cursor: "pointer" }}
                 onClick={() => {
-                  const lat = selectedPlace.geometry?.location?.lat();
-                  const lng = selectedPlace.geometry?.location?.lng();
-                  if (lat && lng) {
-                    const url =
-                      `https://www.google.com/maps/dir/?api=1` +
-                      `&destination=${lat},${lng}` +
-                      `&travelmode=walking`;
+                  // Guard pour safety
+                  const geo = selectedPlace.geometry;
+                  const loc = geo?.location;
+                  if (!loc) return;
 
-                    if (/iPhone|Android|iPad/i.test(navigator.userAgent)) {
-                      window.location.href = url;
-                    } else {
-                      window.open(url, "_blank");
-                    }
+                  const lat = loc.lat();
+                  const lng = loc.lng();
+                  const url =
+                    `https://www.google.com/maps/dir/?api=1` +
+                    `&destination=${lat},${lng}` +
+                    `&travelmode=walking`;
+
+                  if (/iPhone|Android|iPad/i.test(navigator.userAgent)) {
+                    window.location.href = url;
+                  } else {
+                    window.open(url, "_blank");
                   }
                 }}
               >
