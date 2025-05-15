@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
-import { User, useUser } from "../context/UserInfoContext";
+import { ProfilePicture, User, useUser } from "../context/UserInfoContext";
 import { ColorData } from "../data/Color";
 import { profileData } from "../data/Picture";
 import styles from "./Login.module.css";
@@ -19,10 +19,9 @@ function Login() {
         setIsVisible(!isVisible)
 
         const profilePictureIdRow = fetch(`${rootUrl}/api/profilePictures/:id`)
-        console.log(profilePictureIdRow)
 
          fetch(`${rootUrl}/api/profilePictures`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -72,10 +71,15 @@ function Login() {
 
                 const checkUser = await fetch(`${rootUrl}/api/users/${userEmail}`);
 
-                let userData;
+                let userData: User=user;
+                userData.name = userInfo.name
+                userData.email = userEmail
+                userData.defaultPicture = userInfo.picture
+                userData.xp = 0
+                
 
         if (checkUser.status === 404) {
-          const newUser = await fetch(`${rootUrl}/api/users`, {
+          const newUserId = await fetch(`${rootUrl}/api/users`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -86,7 +90,11 @@ function Login() {
               xp: 0,
             }),
           });
-          userData = await newUser.json();
+            const userDataId = await newUserId.json();
+            const profilePic: ProfilePicture = {
+                img: null,
+                class: null
+            }
           const newProfilePicture = await fetch(
             `${rootUrl}/api/profilePictures`,
             {
@@ -95,16 +103,22 @@ function Login() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                img: null,
-                class: null,
-                user_id: userData.insertId,
+                  img: profilePic.img,
+                  class: profilePic.class,
+                user_id: userDataId.insertId,
               }),
             }
           );
-          const response = await newProfilePicture.json();
-          console.log(response);
+            const response = await newProfilePicture.json();
+            userData.id = userDataId.insertId
+            userData.profilePicture = profilePic
+            console.log("user data :", userData)
         } else {
-          userData = await checkUser.json();
+            const retrieveUser = await checkUser.json();
+            userData.id = retrieveUser.id
+            userData.profilePicture.class = retrieveUser.class
+            userData.profilePicture.img = retrieveUser.img7
+            userData.xp = retrieveUser.xp
         }
 
                 setUser({
@@ -118,7 +132,7 @@ function Login() {
         },
         onError: (error) => console.log("Login Failed:", error),
     });
-    console.log(user);
+    console.log("user: ",user);
     if (!user.isConnected) {
         return (
             <div
@@ -152,7 +166,7 @@ function Login() {
                                             : user.defaultPicture
                                     }
                                     alt="default profile picture silhouette"
-                                    className={user.profilePicture?.class}
+                                    className={user.profilePicture?.class as string}
                                 />
                                 <button className={styles.validateButton} onClick={handleClick}>
                                     Crée ton avatar
@@ -172,7 +186,7 @@ function Login() {
                                             ? user.profilePicture.img
                                             : user.defaultPicture
                                     }
-                                    className={user.profilePicture?.class}
+                                    className={user.profilePicture?.class as string}
                                 />
                                 <ul className={styles.avatarList}>
                                     {profileData.map((profile) => (

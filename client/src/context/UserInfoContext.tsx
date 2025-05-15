@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type ProfilePicture = {
-  img: string;
-  class: string;
+export type ProfilePicture = {
+  img: string | null;
+  class: string | null;
 };
 
 export type User = {
