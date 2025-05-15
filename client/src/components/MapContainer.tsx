@@ -1,5 +1,10 @@
-import { useImperativeHandle, useEffect, useRef } from "react";
-import { Map, AdvancedMarker, useMap } from "@vis.gl/react-google-maps";
+import { useImperativeHandle, useEffect, useRef, useState } from "react";
+import {
+  Map,
+  AdvancedMarker,
+  InfoWindow,
+  useMap,
+} from "@vis.gl/react-google-maps";
 import styles from "./MapContainer.module.css";
 
 export interface MapContainerRef {
@@ -20,6 +25,8 @@ export default function MapContainer({
   const map = useMap();
   const circleRef = useRef<google.maps.Circle | null>(null);
   const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
 
   useImperativeHandle(
     ref,
@@ -63,7 +70,7 @@ export default function MapContainer({
     });
 
     const service = new google.maps.places.PlacesService(map);
-    const request = {
+    const request: google.maps.places.PlaceSearchRequest = {
       location: markerPosition,
       radius: 5000,
       keyword: "skatepark",
@@ -74,22 +81,27 @@ export default function MapContainer({
         const filteredResults = results.filter((place) => {
           const placeLocation = place.geometry?.location;
           if (!placeLocation) return false;
-
           const distance =
             google.maps.geometry.spherical.computeDistanceBetween(
               markerPosition,
               placeLocation
             );
-
           return distance <= 5000;
         });
 
         const newMarkers = filteredResults.map((place) => {
-          return new google.maps.marker.AdvancedMarkerElement({
+          const marker = new google.maps.marker.AdvancedMarkerElement({
             map,
-            position: place.geometry?.location!,
+            position: place.geometry!.location!,
             title: place.name,
           });
+
+          marker.addListener("click", () => {
+            setSelectedPlace(place);
+            map.panTo(place.geometry!.location!);
+          });
+
+          return marker;
         });
 
         markersRef.current = newMarkers;
@@ -108,6 +120,45 @@ export default function MapContainer({
         disableDefaultUI={true}
       >
         {markerPosition && <AdvancedMarker position={markerPosition} />}
+
+        {selectedPlace && selectedPlace.geometry?.location && (
+          <InfoWindow
+            position={selectedPlace.geometry.location}
+            onCloseClick={() => setSelectedPlace(null)}
+          >
+            <div style={{ maxWidth: "200px" }}>
+              <h3 style={{ margin: "0 0 8px 0" }}>{selectedPlace.name}</h3>
+              {selectedPlace.photos && selectedPlace.photos.length > 0 && (
+                <img
+                  src={selectedPlace.photos[0].getUrl({ maxWidth: 200 })}
+                  alt={selectedPlace.name}
+                  style={{ width: "100%", height: "auto", marginBottom: "8px" }}
+                />
+              )}
+              <button
+                style={{ padding: "8px 12px", cursor: "pointer" }}
+                onClick={() => {
+                  const lat = selectedPlace.geometry?.location?.lat();
+                  const lng = selectedPlace.geometry?.location?.lng();
+                  if (lat && lng) {
+                    const url =
+                      `https://www.google.com/maps/dir/?api=1` +
+                      `&destination=${lat},${lng}` +
+                      `&travelmode=walking`;
+
+                    if (/iPhone|Android|iPad/i.test(navigator.userAgent)) {
+                      window.location.href = url;
+                    } else {
+                      window.open(url, "_blank");
+                    }
+                  }
+                }}
+              >
+                Itinéraire 🛹
+              </button>
+            </div>
+          </InfoWindow>
+        )}
       </Map>
     </div>
   );
