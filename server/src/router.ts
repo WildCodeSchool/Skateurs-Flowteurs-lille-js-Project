@@ -17,7 +17,7 @@ router.get("/api/tricks/:id", trickAction.read);
 router.get("/api/users", userAction.browse);
 router.post("/api/users", userAction.add);
 router.get("/api/users/:email", userAction.read);
-router.put("/api/users/:id", userAction.update);
+router.patch("/api/users/:id", userAction.update);
 
 router.get("/api/profilePictures", profilePictureAction.browse);
 router.post("/api/profilePictures", profilePictureAction.add);
