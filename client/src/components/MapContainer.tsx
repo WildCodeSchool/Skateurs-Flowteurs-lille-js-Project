@@ -44,7 +44,6 @@ export default function MapContainer({
   useEffect(() => {
     if (!map || !markerPosition) return;
 
-    // Gérer le cercle
     if (showCircle) {
       if (!circleRef.current) {
         circleRef.current = new google.maps.Circle({
@@ -66,10 +65,8 @@ export default function MapContainer({
       circleRef.current = null;
     }
 
-    // Retirer les anciens marqueurs
     markersRef.current.forEach((m) => (m.map = null));
 
-    // Recherche des skateparks à proximité
     const service = new google.maps.places.PlacesService(map);
     const request: google.maps.places.PlaceSearchRequest = {
       location: markerPosition,
@@ -94,10 +91,9 @@ export default function MapContainer({
             map,
             position: place.geometry!.location!,
             title: place.name,
-            gmpClickable: true, // rend l’élément cliquable
+            gmpClickable: true,
           });
 
-          // Écouteur sur l’événement personnalisé
           marker.addEventListener("gmp-click", () => {
             setSelectedPlace(place);
             map.panTo(place.geometry!.location!);
@@ -149,7 +145,6 @@ export default function MapContainer({
               <button
                 style={{ padding: "8px 12px", cursor: "pointer" }}
                 onClick={() => {
-                  // Guard pour safety
                   const geo = selectedPlace.geometry;
                   const loc = geo?.location;
                   if (!loc) return;
