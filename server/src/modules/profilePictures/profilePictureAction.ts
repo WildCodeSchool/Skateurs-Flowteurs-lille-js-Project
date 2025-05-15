@@ -1,10 +1,7 @@
 import type { RequestHandler } from "express";
 
 // Import access to data
-import {
-  default as UserRepository,
-  default as userRepository,
-} from "./userRepository";
+import { default as profilePictureRepository } from "./profilePictureRepository";
 
 /**
  * @swagger
@@ -33,10 +30,10 @@ import {
 const browse: RequestHandler = async (req, res, next) => {
   try {
     // Fetch all users
-    const users = await UserRepository.readAll();
+    const profilePictures = await profilePictureRepository.readAll();
 
     // Respond with the users in JSON format
-    res.json(users);
+    res.json(profilePictures);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -70,15 +67,17 @@ const browse: RequestHandler = async (req, res, next) => {
 const read: RequestHandler = async (req, res, next) => {
   try {
     // Fetch a specific user based on the provided ID
-    const userEmail = req.params.email;
-    const user = await userRepository.read(userEmail);
+    const profilePictureId = Number(req.params.id);
+    const profilePicture = await profilePictureRepository.read(
+      profilePictureId
+    );
 
     // If the user is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the user in JSON format
-    if (user == null) {
+    if (profilePicture == null) {
       res.sendStatus(404);
     } else {
-      res.json(user);
+      res.json(profilePicture);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -124,15 +123,13 @@ const read: RequestHandler = async (req, res, next) => {
 const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the user data from the request body
-    const newUser = {
-      id: req.body,
-      name: req.body.name,
-      email: req.body.email,
-      xp: req.body.xp,
+    const newProfilePicture = {
+      img: req.body.img,
+      class: req.body.class,
+      user_id: req.body.user_id,
     };
-
     // Create the user
-    const insertId = await userRepository.create(newUser);
+    const insertId = await profilePictureRepository.create(newProfilePicture);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted user
     res.status(201).json({ insertId });
@@ -144,18 +141,19 @@ const add: RequestHandler = async (req, res, next) => {
 
 const update: RequestHandler = async (req, res, next) => {
   try {
-    const userId = Number(req.params.id);
+    const profilePictureId = Number(req.params.id);
 
-    const updatedUser = {
-      id: userId,
-      name: req.body.name,
-      email: req.body.email,
-      xp: req.body.xp,
+    const updatedProfilePicture = {
+      img: req.body.img,
+      class: req.body.class,
+      user_id: req.body.user_id,
     };
 
-    const userUpdate = await userRepository.update(updatedUser);
+    const profilePictureUpdate = await profilePictureRepository.update(
+      updatedProfilePicture
+    );
 
-    res.status(200).json({ userUpdate });
+    res.status(200).json({ profilePictureUpdate });
   } catch (err) {
     next(err);
   }

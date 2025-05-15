@@ -10,7 +10,7 @@ export const ProgressBar = () => {
       <div className={styles.tricksAndXp}>
         <p>XP : {user?.xp ?? 0}</p>
         <p>
-          Tricks : {user?.validatedTricks ? user.validatedTricks.length : 0}
+          Tricks : {user?.tricks ? user.tricks.length : 0}
           /30
         </p>
       </div>

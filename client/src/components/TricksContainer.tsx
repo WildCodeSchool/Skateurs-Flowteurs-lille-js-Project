@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTricks } from "../context/TricksContext";
 import { useUser } from "../context/UserInfoContext";
 import { TrickCard } from "./TrickCard";
+import { TrickModel } from "../model/TrickModel";
 import styles from "./TricksContainer.module.css";
 
 export const TricksContainer = () => {
@@ -10,7 +11,6 @@ export const TricksContainer = () => {
   const { tricks, setTricks } = useTricks();
   const [showLoginAlert, setShowLoginAlert] = useState<boolean>(false);
   const { user, setUser } = useUser();
-
   const handleFilter = (newFilter: typeof filter) => setFilter(newFilter);
   const filteredTricksList =
     filter === "all"
@@ -20,10 +20,13 @@ export const TricksContainer = () => {
   useEffect(() => {
     if (!user) return;
 
-    const updatedTricks = tricks.map((trick) => ({
-      ...trick,
-      isValidated: user.validatedTricks.includes(trick.id),
-    }));
+    const updatedTricks = tricks.map((trick) => {
+      const userTrick = user.tricks.find(userTrick => userTrick.id === trick.id)
+      return {
+        ...trick,
+        isValidated: userTrick ? userTrick.isValidated : false
+      }
+    });
 
     setTricks(updatedTricks);
   }, [user]);
@@ -34,27 +37,49 @@ export const TricksContainer = () => {
       return;
     }
 
-    const updatedTricks = tricks.map((trick) => {
+    const updatedTricks = [...tricks]
+    tricks.map(trick => {
       if (trick.id === id) {
-        const isAlreadyValidated = trick.isValidated;
+        trick.isValidated = !trick.isValidated
+        if (trick.isValidated) {
+          setUser({
+            ...user,
+            tricks: updatedTricks.filter(trick => trick.isValidated),
+            xp: user.xp + trick.xp
+          });
+        } else {
+          setUser({
+            ...user,
+            tricks: updatedTricks.filter(trick => trick.isValidated),
+            xp: user.xp - trick.xp
+          });
+        }
 
-        const updatedUser = {
-          ...user,
-          xp: isAlreadyValidated
-            ? (user.xp || 0) - trick.xp
-            : (user.xp || 0) + trick.xp,
-          validatedTricks: isAlreadyValidated
-            ? user.validatedTricks.filter((trick) => trick !== id)
-            : [...user.validatedTricks, id],
-        };
-        setUser(updatedUser);
-
-        return { ...trick, isValidated: !trick.isValidated };
       }
-      return trick;
-    });
+    })
+    setTricks(updatedTricks)
 
-    setTricks(updatedTricks);
+    // const updatedTricks = tricks.map((trick) => {
+    //   if (trick.id === id) {
+    //     const isAlreadyValidated = trick.isValidated;
+
+    //     const updatedUser = {
+    //       ...user,
+    //       xp: isAlreadyValidated
+    //         ? (user.xp || 0) - trick.xp
+    //         : (user.xp || 0) + trick.xp,
+    //       validatedTricks: isAlreadyValidated
+    //         ? user.validatedTricks.filter((trick) => trick !== id)
+    //         : [...user.validatedTricks, id],
+    //     };
+    //     setUser(updatedUser);
+
+    //     return { ...trick, isValidated: !trick.isValidated };
+    //   }
+    //   return trick;
+    // });
+
+    // setTricks(updatedTricks);
   };
 
   return (

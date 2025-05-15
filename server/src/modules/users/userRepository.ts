@@ -7,9 +7,21 @@ type User = {
   name: string;
   email: string;
   xp: number;
-  isConnected: boolean;
-  default_picture: string;
-  profile_picture_id: number;
+};
+
+type Trick = {
+  isValidated: boolean;
+  id: number;
+};
+
+type UserData = {
+  id: number;
+  name: string;
+  email: string;
+  xp: number;
+  img: string;
+  class: string;
+  tricks: Trick[];
 };
 
 class UserRepository {
@@ -18,15 +30,8 @@ class UserRepository {
   async create(user: Omit<User, "id">) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into users (name, email, xp, isConnected, default_picture, profile_picture_id) values (?, ?, ?, ?, ?, ?)",
-      [
-        user.name,
-        user.email,
-        user.xp,
-        user.isConnected,
-        user.default_picture,
-        user.profile_picture_id,
-      ]
+      "insert into users (name, email, xp) values (?, ?, ?)",
+      [user.name, user.email, user.xp ?? 0]
     );
 
     // Return the ID of the newly inserted item
@@ -35,15 +40,32 @@ class UserRepository {
 
   // The Rs of CRUD - Read operations
 
-  async read(id: number) {
+  async read(email: string) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      "select * from users where id = ?",
-      [id]
+      `SELECT U.id, U.name, U.email, U.xp, P.class, P.img, V.is_validated, V.trick_id FROM users as U LEFT JOIN profile_pictures as P ON U.id = P.user_id LEFT JOIN validated_tricks as V ON U.id = V.user_id WHERE U.email = ?`,
+      [email]
     );
+    const user: UserData = {
+      id: rows[0].id,
+      name: rows[0].name,
+      email: rows[0].email,
+      xp: rows[0].xp,
+      img: rows[0].img,
+      class: rows[0].class,
+      tricks: [],
+    };
 
+    if (rows.length > 1) {
+      rows.map((row) => {
+        user.tricks.push({
+          isValidated: row.is_validated === 1 ? true : false,
+          id: row.trick_id,
+        });
+      });
+    }
     // Return the first row of the result, which represents the item
-    return rows[0] as User;
+    return user as User;
   }
 
   async readAll() {
@@ -61,18 +83,10 @@ class UserRepository {
     const [result] = await databaseClient.query<Result>(
       `
     UPDATE users
-    SET name = ?, email = ?, xp = ?, isConnected = ?, default_picture = ?, profile_picture_id = ?
+    SET name = ?, email = ?, xp = ?
     WHERE id = ?
     `,
-      [
-        user.name,
-        user.email,
-        user.xp,
-        user.isConnected,
-        user.default_picture,
-        user.profile_picture_id,
-        user.id,
-      ]
+      [user.name, user.email, user.xp, user.id]
     );
     return result.affectedRows === 1;
   }
