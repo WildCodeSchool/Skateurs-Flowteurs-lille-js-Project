@@ -43,6 +43,10 @@ export const TricksContainer = () => {
         trick.isValidated = !trick.isValidated
     } })
     setTricks(updatedTricks)
+    setUser({
+      ...user,
+      tricks: updatedTricks.filter(trick => trick.isValidated)
+    });
     // const updatedTricks = tricks.map((trick) => {
     //   if (trick.id === id) {
     //     const isAlreadyValidated = trick.isValidated;
