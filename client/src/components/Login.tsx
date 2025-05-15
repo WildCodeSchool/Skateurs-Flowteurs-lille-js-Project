@@ -117,7 +117,7 @@ function Login() {
             const retrieveUser = await checkUser.json();
             userData.id = retrieveUser.id
             userData.profilePicture.class = retrieveUser.class
-            userData.profilePicture.img = retrieveUser.img7
+            userData.profilePicture.img = retrieveUser.img
             userData.xp = retrieveUser.xp
         }
 
