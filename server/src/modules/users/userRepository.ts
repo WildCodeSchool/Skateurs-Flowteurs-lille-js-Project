@@ -64,7 +64,6 @@ class UserRepository {
         });
       });
     }
-    console.log([rows]);
     // Return the first row of the result, which represents the item
     return user as User;
   }

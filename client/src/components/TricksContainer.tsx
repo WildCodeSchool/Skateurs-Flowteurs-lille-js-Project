@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTricks } from "../context/TricksContext";
 import { useUser } from "../context/UserInfoContext";
 import { TrickCard } from "./TrickCard";
+import { TrickModel } from "../model/TrickModel";
 import styles from "./TricksContainer.module.css";
 
 export const TricksContainer = () => {
@@ -10,7 +11,6 @@ export const TricksContainer = () => {
   const { tricks, setTricks } = useTricks();
   const [showLoginAlert, setShowLoginAlert] = useState<boolean>(false);
   const { user, setUser } = useUser();
-  console.log(tricks)
   const handleFilter = (newFilter: typeof filter) => setFilter(newFilter);
   const filteredTricksList =
     filter === "all"
@@ -37,27 +37,33 @@ export const TricksContainer = () => {
       return;
     }
 
-    const updatedTricks = tricks.map((trick) => {
+    const updatedTricks = [...tricks]
+    tricks.map(trick => {
       if (trick.id === id) {
-        const isAlreadyValidated = trick.isValidated;
+        trick.isValidated = !trick.isValidated
+    } })
+    setTricks(updatedTricks)
+    // const updatedTricks = tricks.map((trick) => {
+    //   if (trick.id === id) {
+    //     const isAlreadyValidated = trick.isValidated;
 
-        const updatedUser = {
-          ...user,
-          xp: isAlreadyValidated
-            ? (user.xp || 0) - trick.xp
-            : (user.xp || 0) + trick.xp,
-          validatedTricks: isAlreadyValidated
-            ? user.validatedTricks.filter((trick) => trick !== id)
-            : [...user.validatedTricks, id],
-        };
-        setUser(updatedUser);
+    //     const updatedUser = {
+    //       ...user,
+    //       xp: isAlreadyValidated
+    //         ? (user.xp || 0) - trick.xp
+    //         : (user.xp || 0) + trick.xp,
+    //       validatedTricks: isAlreadyValidated
+    //         ? user.validatedTricks.filter((trick) => trick !== id)
+    //         : [...user.validatedTricks, id],
+    //     };
+    //     setUser(updatedUser);
 
-        return { ...trick, isValidated: !trick.isValidated };
-      }
-      return trick;
-    });
+    //     return { ...trick, isValidated: !trick.isValidated };
+    //   }
+    //   return trick;
+    // });
 
-    setTricks(updatedTricks);
+    // setTricks(updatedTricks);
   };
 
   return (

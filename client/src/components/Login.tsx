@@ -112,7 +112,6 @@ function Login() {
           const response = await newProfilePicture.json();
           userData.id = userDataId.insertId;
           userData.profilePicture = profilePic;
-          console.log("user data :", userData);
         } else {
           const retrieveUser = await checkUser.json();
           userData.id = retrieveUser.id;
@@ -133,7 +132,6 @@ function Login() {
     },
     onError: (error) => console.log("Login Failed:", error),
   });
-  console.log("user: ", user);
   if (!user.isConnected) {
     return (
       <div
