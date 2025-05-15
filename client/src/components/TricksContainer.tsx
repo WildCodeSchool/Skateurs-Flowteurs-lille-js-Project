@@ -41,12 +41,24 @@ export const TricksContainer = () => {
     tricks.map(trick => {
       if (trick.id === id) {
         trick.isValidated = !trick.isValidated
-    } })
+        if (trick.isValidated) {
+          setUser({
+            ...user,
+            tricks: updatedTricks.filter(trick => trick.isValidated),
+            xp: user.xp + trick.xp
+          });
+        } else {
+          setUser({
+            ...user,
+            tricks: updatedTricks.filter(trick => trick.isValidated),
+            xp: user.xp - trick.xp
+          });
+        }
+
+      }
+    })
     setTricks(updatedTricks)
-    setUser({
-      ...user,
-      tricks: updatedTricks.filter(trick => trick.isValidated)
-    });
+
     // const updatedTricks = tricks.map((trick) => {
     //   if (trick.id === id) {
     //     const isAlreadyValidated = trick.isValidated;
