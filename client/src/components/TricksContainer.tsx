@@ -10,7 +10,7 @@ export const TricksContainer = () => {
   const { tricks, setTricks } = useTricks();
   const [showLoginAlert, setShowLoginAlert] = useState<boolean>(false);
   const { user, setUser } = useUser();
-
+  console.log(tricks)
   const handleFilter = (newFilter: typeof filter) => setFilter(newFilter);
   const filteredTricksList =
     filter === "all"
@@ -20,10 +20,13 @@ export const TricksContainer = () => {
   useEffect(() => {
     if (!user) return;
 
-    const updatedTricks = tricks.map((trick) => ({
-      ...trick,
-      isValidated: user.validatedTricks.includes(trick.id),
-    }));
+    const updatedTricks = tricks.map((trick) => {
+      const userTrick = user.tricks.find(userTrick => userTrick.id === trick.id)
+      return {
+        ...trick,
+        isValidated: userTrick ? userTrick.isValidated : false
+      }
+    });
 
     setTricks(updatedTricks);
   }, [user]);
