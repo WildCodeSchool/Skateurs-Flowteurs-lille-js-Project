@@ -6,6 +6,8 @@ import { TrickCard } from "./TrickCard";
 import { TrickModel } from "../model/TrickModel";
 import styles from "./TricksContainer.module.css";
 
+const rootUrl = import.meta.env.VITE_ROOT_URL;
+
 export const TricksContainer = () => {
   const [filter, setFilter] = useState<"Noob" | "Mid" | "Hard" | "all">("all");
   const { tricks, setTricks } = useTricks();
@@ -47,39 +49,37 @@ export const TricksContainer = () => {
             tricks: updatedTricks.filter(trick => trick.isValidated),
             xp: user.xp + trick.xp
           });
+          fetch(`${rootUrl}/api/users/${user.id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...user,
+              xp: user.xp + trick.xp
+            }),
+          });
         } else {
           setUser({
             ...user,
             tricks: updatedTricks.filter(trick => trick.isValidated),
             xp: user.xp - trick.xp
           });
+          
+          fetch(`${rootUrl}/api/users/${user.id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...user,
+              xp: user.xp - trick.xp
+            }),
+          });
         }
-
       }
     })
     setTricks(updatedTricks)
-
-    // const updatedTricks = tricks.map((trick) => {
-    //   if (trick.id === id) {
-    //     const isAlreadyValidated = trick.isValidated;
-
-    //     const updatedUser = {
-    //       ...user,
-    //       xp: isAlreadyValidated
-    //         ? (user.xp || 0) - trick.xp
-    //         : (user.xp || 0) + trick.xp,
-    //       validatedTricks: isAlreadyValidated
-    //         ? user.validatedTricks.filter((trick) => trick !== id)
-    //         : [...user.validatedTricks, id],
-    //     };
-    //     setUser(updatedUser);
-
-    //     return { ...trick, isValidated: !trick.isValidated };
-    //   }
-    //   return trick;
-    // });
-
-    // setTricks(updatedTricks);
   };
 
   return (
