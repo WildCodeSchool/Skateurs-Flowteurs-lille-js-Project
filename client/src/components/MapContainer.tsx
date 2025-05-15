@@ -1,5 +1,10 @@
-import { useImperativeHandle, useEffect, useRef } from "react";
-import { Map, AdvancedMarker, useMap } from "@vis.gl/react-google-maps";
+import { useImperativeHandle, useEffect, useRef, useState } from "react";
+import {
+  Map,
+  AdvancedMarker,
+  InfoWindow,
+  useMap,
+} from "@vis.gl/react-google-maps";
 import styles from "./MapContainer.module.css";
 
 export interface MapContainerRef {
@@ -20,6 +25,8 @@ export default function MapContainer({
   const map = useMap();
   const circleRef = useRef<google.maps.Circle | null>(null);
   const markersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+  const [selectedPlace, setSelectedPlace] =
+    useState<google.maps.places.PlaceResult | null>(null);
 
   useImperativeHandle(
     ref,
@@ -58,12 +65,10 @@ export default function MapContainer({
       circleRef.current = null;
     }
 
-    markersRef.current.forEach((marker) => {
-      marker.map = null;
-    });
+    markersRef.current.forEach((m) => (m.map = null));
 
     const service = new google.maps.places.PlacesService(map);
-    const request = {
+    const request: google.maps.places.PlaceSearchRequest = {
       location: markerPosition,
       radius: 5000,
       keyword: "skatepark",
@@ -71,25 +76,30 @@ export default function MapContainer({
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        const filteredResults = results.filter((place) => {
-          const placeLocation = place.geometry?.location;
-          if (!placeLocation) return false;
-
-          const distance =
-            google.maps.geometry.spherical.computeDistanceBetween(
-              markerPosition,
-              placeLocation
-            );
-
-          return distance <= 5000;
+        const filtered = results.filter((place) => {
+          const loc = place.geometry?.location;
+          if (!loc) return false;
+          const dist = google.maps.geometry.spherical.computeDistanceBetween(
+            markerPosition,
+            loc
+          );
+          return dist <= 5000;
         });
 
-        const newMarkers = filteredResults.map((place) => {
-          return new google.maps.marker.AdvancedMarkerElement({
+        const newMarkers = filtered.map((place) => {
+          const marker = new google.maps.marker.AdvancedMarkerElement({
             map,
-            position: place.geometry?.location!,
+            position: place.geometry!.location!,
             title: place.name,
+            gmpClickable: true,
           });
+
+          marker.addEventListener("gmp-click", () => {
+            setSelectedPlace(place);
+            map.panTo(place.geometry!.location!);
+          });
+
+          return marker;
         });
 
         markersRef.current = newMarkers;
@@ -108,6 +118,56 @@ export default function MapContainer({
         disableDefaultUI={true}
       >
         {markerPosition && <AdvancedMarker position={markerPosition} />}
+
+        {selectedPlace?.geometry?.location && (
+          <InfoWindow
+            position={selectedPlace.geometry.location}
+            onCloseClick={() => setSelectedPlace(null)}
+          >
+            <div style={{ maxWidth: "200px" }}>
+              <h3 style={{ margin: "0 0 8px 0" }}>{selectedPlace.name}</h3>
+              <img
+                src={
+                  selectedPlace.photos && selectedPlace.photos.length > 0
+                    ? selectedPlace.photos[0].getUrl({ maxWidth: 200 })
+                    : "/public/default.jpg"
+                }
+                alt={selectedPlace.name}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  marginBottom: "8px",
+                }}
+                onError={(e) => {
+                  e.currentTarget.src = "/default.jpg";
+                }}
+              />
+              <button
+                style={{ padding: "8px 12px", cursor: "pointer" }}
+                onClick={() => {
+                  const geo = selectedPlace.geometry;
+                  const loc = geo?.location;
+                  if (!loc) return;
+
+                  const lat = loc.lat();
+                  const lng = loc.lng();
+                  const url =
+                    `https://www.google.com/maps/dir/?api=1` +
+                    `&destination=${lat},${lng}` +
+                    `&travelmode=walking`;
+
+                  if (/iPhone|Android|iPad/i.test(navigator.userAgent)) {
+                    window.location.href = url;
+                  } else {
+                    window.open(url, "_blank");
+                  }
+                }}
+              >
+                Itinéraire 🛹
+              </button>
+            </div>
+          </InfoWindow>
+        )}
       </Map>
     </div>
   );
