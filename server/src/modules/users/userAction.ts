@@ -48,7 +48,7 @@ const browse: RequestHandler = async (req, res, next) => {
  * @swagger
  * /api/users/{email}:
  *   get:
- *     summary: Récupère un user par ID
+ *     summary: Récupère un user par Email
  *     tags: [users]
  *     parameters:
  *       - in: path
@@ -56,7 +56,7 @@ const browse: RequestHandler = async (req, res, next) => {
  *         required: true
  *         schema:
  *           type: string
- *         description: ID de l'user à récupérer
+ *         description: Email de l'user à récupérer
  *     responses:
  *       200:
  *         description: user trouvé
@@ -69,7 +69,7 @@ const browse: RequestHandler = async (req, res, next) => {
  */
 const read: RequestHandler = async (req, res, next) => {
   try {
-    // Fetch a specific user based on the provided ID
+    // Fetch a specific user based on the provided Email
     const userEmail = req.params.email;
     const user = await userRepository.read(userEmail);
 
@@ -125,7 +125,6 @@ const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the user data from the request body
     const newUser = {
-      id: req.body,
       name: req.body.name,
       email: req.body.email,
       xp: req.body.xp,
