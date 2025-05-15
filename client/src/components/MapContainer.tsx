@@ -128,13 +128,18 @@ export default function MapContainer({
           >
             <div style={{ maxWidth: "200px" }}>
               <h3 style={{ margin: "0 0 8px 0" }}>{selectedPlace.name}</h3>
-              {selectedPlace.photos && selectedPlace.photos.length > 0 && (
-                <img
-                  src={selectedPlace.photos[0].getUrl({ maxWidth: 200 })}
-                  alt={selectedPlace.name}
-                  style={{ width: "100%", height: "auto", marginBottom: "8px" }}
-                />
-              )}
+              <img
+                src={
+                  selectedPlace.photos && selectedPlace.photos.length > 0
+                    ? selectedPlace.photos[0].getUrl({ maxWidth: 200 })
+                    : "/public/default.jpg"
+                }
+                alt={selectedPlace.name}
+                style={{ width: "100%", height: "auto", marginBottom: "8px" }}
+                onError={(e) => {
+                  e.currentTarget.src = "/default.jpg";
+                }}
+              />
               <button
                 style={{ padding: "8px 12px", cursor: "pointer" }}
                 onClick={() => {
