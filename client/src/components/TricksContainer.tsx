@@ -83,7 +83,6 @@ export const TricksContainer = () => {
       }
     })
     const checkValidatedTricks = await fetch(`${rootUrl}/api/validatedtricks/${id}/${user.id}`);
-    console.log(checkValidatedTricks)
     if (checkValidatedTricks.status > 300) {
       fetch(`${rootUrl}/api/validatedtricks`, {
         method: "POST",
@@ -99,7 +98,6 @@ export const TricksContainer = () => {
     } else {
       const currentTrick = tricks.find(trick => trick.id === id) as Trick
       const result = await checkValidatedTricks.json()
-      console.log(result)
       fetch(`${rootUrl}/api/validatedtricks`, {
         method: "PATCH",
         headers: {

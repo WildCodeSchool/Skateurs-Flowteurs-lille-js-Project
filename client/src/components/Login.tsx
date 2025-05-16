@@ -129,7 +129,6 @@ function Login() {
         console.error("Error fetching user info:", error);
       }
     },
-    onError: (error) => console.log("Login Failed:", error),
   });
   if (!user.isConnected) {
     return (
