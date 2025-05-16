@@ -68,20 +68,19 @@ function Login() {
 
         const userInfo = await response.json();
         const userEmail = userInfo.email;
-
         const checkUser = await fetch(`${rootUrl}/api/users/${userEmail}`);
-
         let userData: User = user;
         userData.name = userInfo.name;
         userData.email = userEmail;
         userData.defaultPicture = userInfo.picture;
         userData.xp = 0;
 
-        if (checkUser.status === 404) {
+        if (checkUser.status > 300) {
           const newUserId = await fetch(`${rootUrl}/api/users`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:3000",
             },
             body: JSON.stringify({
               name: userInfo.name,
