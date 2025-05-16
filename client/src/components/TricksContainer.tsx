@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useTricks } from "../context/TricksContext";
-import { useUser } from "../context/UserInfoContext";
+import { Trick, useUser } from "../context/UserInfoContext";
 import { TrickCard } from "./TrickCard";
-import { TrickModel } from "../model/TrickModel";
 import styles from "./TricksContainer.module.css";
 
 const rootUrl = import.meta.env.VITE_ROOT_URL;
@@ -33,7 +32,7 @@ export const TricksContainer = () => {
     setTricks(updatedTricks);
   }, [user]);
 
-  const handleValidation = (id: number) => {
+  const handleValidation = async (id: number) => {
     if (!user) {
       setShowLoginAlert(true);
       return;
@@ -43,10 +42,13 @@ export const TricksContainer = () => {
     tricks.map(trick => {
       if (trick.id === id) {
         trick.isValidated = !trick.isValidated
+        const validatedMinimalTricks = updatedTricks
+          .filter(trick => trick.isValidated)
+          .map(trick => ({ id: trick.id, isValidated: trick.isValidated }));
         if (trick.isValidated) {
           setUser({
             ...user,
-            tricks: updatedTricks.filter(trick => trick.isValidated),
+            tricks: validatedMinimalTricks,
             xp: user.xp + trick.xp
           });
           fetch(`${rootUrl}/api/users/${user.id}`, {
@@ -62,10 +64,10 @@ export const TricksContainer = () => {
         } else {
           setUser({
             ...user,
-            tricks: updatedTricks.filter(trick => trick.isValidated),
+            tricks: validatedMinimalTricks,
             xp: user.xp - trick.xp
           });
-          
+
           fetch(`${rootUrl}/api/users/${user.id}`, {
             method: "PATCH",
             headers: {
@@ -77,11 +79,40 @@ export const TricksContainer = () => {
             }),
           });
         }
+
       }
     })
+    const checkValidatedTricks = await fetch(`${rootUrl}/api/validatedtricks/${id}/${user.id}`);
+    console.log(checkValidatedTricks)
+    if (checkValidatedTricks.status > 300) {
+      fetch(`${rootUrl}/api/validatedtricks`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+          isValidated: true,
+          userId: user.id,
+        }),
+      });
+    } else {
+      const currentTrick = tricks.find(trick => trick.id === id) as Trick
+      const result = await checkValidatedTricks.json()
+      console.log(result)
+      fetch(`${rootUrl}/api/validatedtricks`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: result.id,
+          isValidated: currentTrick.isValidated,
+        }),
+      });
+    }
     setTricks(updatedTricks)
   };
-
   return (
     <>
       {showLoginAlert && (

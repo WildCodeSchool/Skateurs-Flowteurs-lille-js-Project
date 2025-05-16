@@ -3,18 +3,20 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 type Trick = {
-  isValidated: boolean;
   id: number;
+  isValidated: boolean;
+  trickId: number;
+  userId: number;
 };
 
 class validatedTrickRepository {
   // The C of CRUD - Create operation
 
-  async create(trick: Trick) {
+  async create(trick: Omit<Trick, "id">) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into validated_tricks (id, is_validated) values (?, ?)",
-      [trick.isValidated, trick.id]
+      "insert into validated_tricks (trick_id, is_validated, user_id) values (?, ?, ?)",
+      [trick.trickId, trick.isValidated, trick.userId]
     );
 
     // Return the ID of the newly inserted item
@@ -23,17 +25,12 @@ class validatedTrickRepository {
 
   // The Rs of CRUD - Read operations
 
-  async read(id: number) {
+  async read(trickId: number, userId: number) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT U.id, U.name, U.email, U.xp, P.class, P.img, V.is_validated, V.trick_id FROM users as U LEFT JOIN profile_pictures as P ON U.id = P.user_id LEFT JOIN validated_tricks as V ON U.id = V.user_id WHERE V.id = ?`,
-      [id]
+      `SELECT * FROM validated_tricks WHERE trick_id = ? and user_id = ?`,
+      [trickId, userId]
     );
-    const trick: Trick = {
-      id: rows[0].id,
-      isValidated: rows[0].isValidated,
-    };
-    console.log([rows]);
     // Return the first row of the result, which represents the item
     return rows[0] as Trick;
   }
@@ -51,11 +48,11 @@ class validatedTrickRepository {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
-  async update(trick: Trick) {
+  async update(trick: Omit<Trick, "userId, trickId">) {
     const [result] = await databaseClient.query<Result>(
       `
-    UPDATE trick
-    SET isValidated = ?, id = ?
+    UPDATE validated_tricks
+    SET is_validated = ?
     WHERE id = ?
     `,
       [trick.isValidated, trick.id]

@@ -43,16 +43,22 @@ const browse: RequestHandler = async (req, res, next) => {
 // The R of BREAD - Read operation
 /**
  * @swagger
- * /api/users/{email}:
+ * /api/users/{trickId}/{userId}:
  *   get:
  *     summary: Récupère un user par ID
  *     tags: [users]
  *     parameters:
  *       - in: path
- *         name: email
+ *         name: trickId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
+ *         description: ID du trick à récupérer
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: number
  *         description: ID de l'user à récupérer
  *     responses:
  *       200:
@@ -67,8 +73,9 @@ const browse: RequestHandler = async (req, res, next) => {
 const read: RequestHandler = async (req, res, next) => {
   try {
     // Fetch a specific user based on the provided ID
-    const trickId = Number(req.params.id);
-    const trick = await validatedTrickRepository.read(trickId);
+    const trickId = Number(req.params.trickId);
+    const userId = Number(req.params.trickId)
+    const trick = await validatedTrickRepository.read(trickId, userId);
 
     // If the user is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the user in JSON format
@@ -122,8 +129,9 @@ const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the user data from the request body
     const newValidatedTrick = {
-      id: req.body.id,
+      trickId: req.body.id,
       isValidated: req.body.isValidated,
+      userId: req.body.userId
     };
 
     // Create the user

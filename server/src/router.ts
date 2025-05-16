@@ -27,6 +27,7 @@ router.patch("/api/profilePictures", profilePictureAction.update);
 
 router.post("/api/validatedTricks", validatedTrickAction.add);
 router.patch("/api/validatedTricks", validatedTrickAction.update);
+router.get("/api/validatedTricks/:trickId/:userId", validatedTrickAction.read);
 
 /* ************************************************************************* */
 
