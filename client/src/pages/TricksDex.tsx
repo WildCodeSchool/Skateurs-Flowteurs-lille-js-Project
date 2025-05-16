@@ -11,7 +11,7 @@ export const TricksDex = () => {
           <p>
             Explore les figures, regarde des tutos vidéo pour les apprendre, et
             ajoute-les à ton palmarès en les réussissant. <br /> Chaque trick
-            validé te fait gagner de l’XP et fait progresser ton profil. Plus tu
+            validé te fait gagner de l'XP et fait progresser ton profil. Plus tu
             rides, plus tu montes en niveau. Prêt à tous les débloquer ?
           </p>
         </section>

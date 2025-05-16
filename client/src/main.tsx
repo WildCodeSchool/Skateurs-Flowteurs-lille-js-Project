@@ -2,13 +2,14 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
-import { UserProvider } from "./context/UserInfoContext";
 import App from "./App";
+import { TricksProvider } from "./context/TricksContext";
+import { UserProvider } from "./context/UserInfoContext";
+import { Contact } from "./pages/Contact";
 import { HomePage } from "./pages/HomePage";
 import MapPage from "./pages/MapPage";
-import { Profile } from "./pages/profile";
+import { Profile } from "./pages/Profile";
 import { TricksDex } from "./pages/TricksDex";
-import { Contact } from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <UserProvider>
-        <RouterProvider router={router} />
+        <TricksProvider>
+          <RouterProvider router={router} />
+        </TricksProvider>
       </UserProvider>
     </GoogleOAuthProvider>
   </StrictMode>
